@@ -1,20 +1,9 @@
----
----
 
-// Import reset 
-@import "partials/reset";
-
-// Import colors, fonts etc...
-@import "partials/variables";
-
-// Import custom mixins
-@import "partials/mixins";
-
-// Import layout mixin
-@import "partials/layout";
-
-// Import syntax 
-@import "partials/syntax";
+@import "_sass/partials/reset";
+@import "_sass/partials/variables";
+@import "_sass/partials/mixins";
+@import "_sass/partials/layout";
+@import "_sass/partials/syntax";
 
 
 /* -------------------------------- 
