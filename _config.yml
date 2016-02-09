@@ -11,4 +11,29 @@ github_username:  devdrops
 markdown: kramdown
 permalink: pretty
 gems: ['kramdown']
-exclude: ['config.ru', 'Gemfile', 'Gemfile.lock', 'vendor', 'Procfile', 'Rakefile']
+exclude: ['config.ru', 'Gemfile', 'Gemfile.lock', 'vendor', 'Procfile', 'Rakefile', 'CNAME', 'README.md', '.gitignore', '.sass-cache', 'Gemfile.lock']
+
+harmony:
+  name: DevDrops
+  description: My personal site.
+  meta_description: > #
+   My personal site.
+  basetheme: theme-base-01
+  author:
+    name: Davi Marcondes Moreira
+    email: davi.marcondes.moreira@gmail.com
+    url: http://www.devdrops.me
+  google_analytics_key: .
+  social:
+    github: devdrops
+    twitter: devdrops
+    facebook: .
+    gplus: .
+    dribble: .
+    pinterest: .
+  show_disclaimer: true
+
+highlighter: pygments
+sass:
+  sass_dir: assets/css/_sass
+  style: :compressed
