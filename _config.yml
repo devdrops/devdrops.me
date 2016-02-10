@@ -15,9 +15,9 @@ exclude: ['config.ru', 'Gemfile', 'Gemfile.lock', 'vendor', 'Procfile', 'Rakefil
 
 harmony:
   name: DevDrops
-  description: My personal site.
+  description: PHP | JS | CSS | WEB | STUFF
   meta_description: > #
-   My personal site.
+   PHP | JS | CSS | WEB | STUFF
   basetheme: theme-base-01
   author:
     name: Davi Marcondes Moreira
@@ -31,7 +31,7 @@ harmony:
     gplus: +DaviMarcondesMoreira
     dribble:
     pinterest:
-  show_disclaimer: true
+  show_disclaimer: false
 
 highlighter: pygments
 sass:
