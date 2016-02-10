@@ -23,14 +23,14 @@ harmony:
     name: Davi Marcondes Moreira
     email: davi.marcondes.moreira@gmail.com
     url: http://www.devdrops.me
-  google_analytics_key: .
+  google_analytics_key:
   social:
     github: devdrops
     twitter: devdrops
-    facebook: .
-    gplus: .
-    dribble: .
-    pinterest: .
+    facebook:
+    gplus: +DaviMarcondesMoreira
+    dribble:
+    pinterest:
   show_disclaimer: true
 
 highlighter: pygments
