@@ -11,7 +11,7 @@ The following steps were executed in a vagrant box using Ubuntu, and with the Yo
 
 ### Xdebug
 
-<div style="text-align:center"><img src ="/assets/images/2015/05/06/xdebug-logo.png" /></div>
+<img src ="/assets/images/2015/05/06/xdebug-logo.png" align="center" />
 
 <a href="http://xdebug.org/"><strong>Xdebug</strong></a> is one of the most amazing tools for any PHP developer. 
 Consider yourself in the following situation: you have your code base, developed under some framework, and you have some few bugs while developing new features. The most common attitude would be to add some <code>echo</code> calls to find out what exactly is happening in your code. Or even some <code>var_dump</code> to output the value of some variables.
@@ -23,7 +23,7 @@ Well that's the most usual behaviour for many developers. But if you've started 
 
 ### Vagrant
 
-<div style="text-align:center"><img src ="/assets/images/2015/05/06/vagrant-logo.png" /></div>
+<img src ="/assets/images/2015/05/06/vagrant-logo.png" align="center" />
 
 <a href="https://www.vagrantup.com/"><strong>Vagrant</strong></a> is a tool to provide virtual environments for development, with different specifications from each other.  It's based on virtual machines inside your OS, and allow you to have flexible and portable environments.
 
