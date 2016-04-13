@@ -19,3 +19,17 @@ For this post, I'll consider that you already have:
 ### Getting Started
 
 
+
+
+
+# Vagrant and Blackfire
+
+* Provisioning your Vagrant box with Ansible:
+	* Create box
+	* Use Ansible Galaxy to install Blackfire
+	* Use basic shell to install Blackfire
+	* Other ways?
+* Check if Blackfire is correctly installed in your Vagrant box
+	* Add any required configuration
+* Provide an PHP application
+* Profile your app with Blackfire
