@@ -4,7 +4,7 @@ title: About me
 permalink: /about/
 ---
 
-![](/assets/images/php_experience18.jpg)
+![](/assets/images/me/php_experience18.jpg)
 
 Hi!
 

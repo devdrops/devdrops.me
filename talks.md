@@ -6,7 +6,7 @@ permalink: /talks/
 
 List of all my presentations/talks.
 
-Questions? Check out how to reach me at tre [about](/about) section :)
+Questions? Check out how to reach me at the [about](/about) section :)
 
 #### 2016-11-14 - Refatoração
 
