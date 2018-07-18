@@ -77,8 +77,8 @@ Presentation at Pagar.me Talks.
 
 Talk realized at PHP Experience 2018.
 
-* [Slides (pt_BR)]()
-* Video (pt_BR)
+* [Slides (pt_BR)](https://docs.google.com/presentation/d/1dE1s4JcD500Er8ATtS2k-TAkCE3-m9IE6el2oxykpXc/edit?usp=sharing)
+* [Video (pt_BR)](https://www.youtube.com/watch?v=fUNW_a6Selg)
 * [Source code](https://github.com/devdrops/refactoring)
 
 #### 2018-05-24 - Trabalho Remoto na Vida Real
