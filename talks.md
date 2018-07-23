@@ -88,3 +88,10 @@ Presentation at HHBR.
 * [Slides (pt_BR)](https://speakerdeck.com/devdrops/trabalho-remoto-na-vida-real)
 * [Video (pt_BR)](https://www.youtube.com/watch?v=6w6csM5u16g)
 
+#### 2018-07-21 - Por Quê Ainda Escolher O PHP?
+
+Talk realized at The Developers Conference 2018 - São Paulo.
+
+* [Slides (pt_BR)](https://speakerdeck.com/devdrops/por-que-ainda-escolher-o-php-the-developers-conference-sp-2018)
+
+
