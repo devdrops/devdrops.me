@@ -94,4 +94,10 @@ Talk realized at The Developers Conference 2018 - São Paulo.
 
 * [Slides (pt_BR)](https://speakerdeck.com/devdrops/por-que-ainda-escolher-o-php-the-developers-conference-sp-2018)
 
+#### 2018-08-18 - Como minha vida mudou depois do tmux
+
+Talk realized at 2º PHPVale meetup - São José dos Campos, SP.
+
+* [Slides (pt_BR)](https://github.com/devdrops/how-was-life-without-tmux)
+
 
