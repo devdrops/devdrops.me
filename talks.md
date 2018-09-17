@@ -100,4 +100,12 @@ Talk realized at 2º PHPVale meetup - São José dos Campos, SP.
 
 * [Slides (pt_BR)](https://github.com/devdrops/how-was-life-without-tmux)
 
+#### 2018-09-14 - SPL e Suas Estruturas de Dados: Como Funcionam? 
+
+Talk realized at PHP Community Summit 2018.
+
+* [Slides (pt_BR)](https://speakerdeck.com/devdrops/spl-e-suas-estruturas-de-dados-como-funcionam-php-community-summit-2018)
+* [Video (pt_BR)]()
+* [Source code](https://github.com/devdrops/spl-data-structures)
+
 
