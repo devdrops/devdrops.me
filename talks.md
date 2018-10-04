@@ -108,4 +108,11 @@ Talk realized at PHP Community Summit 2018.
 * [Video (pt_BR)]()
 * [Source code](https://github.com/devdrops/spl-data-structures)
 
+#### 2018-09-26 - Code Smells 
+
+Talk realized at 7Masters - Code Quality edition.
+
+* [Slides (pt_BR)](https://speakerdeck.com/devdrops/code-smells)
+* [Video (pt_BR)]()
+
 
