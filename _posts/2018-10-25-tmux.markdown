@@ -1,0 +1,7 @@
+---
+layout: post
+title:  "tmux"
+date:   2018-10-25
+categories:
+---
+
