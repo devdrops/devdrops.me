@@ -113,7 +113,7 @@ Talk realized at PHP Community Summit 2018.
 Talk realized at 7Masters - Code Quality edition.
 
 * [Slides (pt_BR)](https://speakerdeck.com/devdrops/code-smells)
-* [Video (pt_BR)]()
+* [Video (pt_BR)](https://www.youtube.com/watch?v=mg-aj3Gheak)
 
 #### 2018-10-13 - Serverless com PHP, isso ecziste?
 
