@@ -123,4 +123,11 @@ Talk realized at PHPeste 2018.
 * [Video (pt_BR)]()
 * [Source code](https://github.com/devdrops/serverless-php)
 
+#### 2018-11-01 - tmux
+
+Presentation at Pagar.me Talks.
+
+* [Slides (pt_BR)](https://github.com/devdrops/how-was-life-without-tmux/tree/pagarme-talk)
+* [Video (pt_BR)](https://www.youtube.com/watch?v=LzXaMBQOs4w)
+* [Source code](https://github.com/devdrops/how-was-life-without-tmux/tree/pagarme-talk)
 
