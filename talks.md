@@ -131,3 +131,9 @@ Presentation at Pagar.me Talks.
 * [Video (pt_BR)](https://www.youtube.com/watch?v=LzXaMBQOs4w)
 * [Source code](https://github.com/devdrops/how-was-life-without-tmux/tree/pagarme-talk)
 
+#### 2019-03-16 - Testes de Software - (Quase) Tudo O Que Você Queria Saber Mas Tinha Medo De Perguntar
+
+Talk realized at 3º PHPVale meetup - Lorena, SP.
+
+* [Slides (pt_BR)](https://slides.com/devdrops/testes-de-software#/)
+
