@@ -137,3 +137,10 @@ Talk realized at 3º PHPVale meetup - Lorena, SP.
 
 * [Slides (pt_BR)](https://slides.com/devdrops/testes-de-software#/)
 
+#### 2019-04-06 - Refatorando Seu Código Com Boas Práticas
+
+Workshop realised at PHP Experience 2019 - Sao Paulo, SP.
+
+* [Slides (pt_BR)](https://speakerdeck.com/devdrops/refatorando-seu-codigo-com-boas-praticas-php-experience-2019)
+* [Source code](https://github.com/devdrops/workshop-refatoracao)
+
