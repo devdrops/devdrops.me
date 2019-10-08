@@ -144,3 +144,10 @@ Workshop realised at PHP Experience 2019 - Sao Paulo, SP.
 * [Slides (pt_BR)](https://speakerdeck.com/devdrops/refatorando-seu-codigo-com-boas-praticas-php-experience-2019)
 * [Source code](https://github.com/devdrops/workshop-refatoracao)
 
+#### 2019-10-05 - Tipos de Dados do PHP7
+
+Talk realized at 4º PHPVale meetup - Guaratinguetá, SP.
+
+* [Slides (pt_BR)](https://slides.com/devdrops/tipos-de-dados-do-php7-4o-meetup-phpvale/)
+* [Source code](https://github.com/devdrops/php7-tipos-de-dados)
+
