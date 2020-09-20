@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MySQL &#43; Windows: Command Line Tips &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Blog pessoal sobre tecnologia e outras coisas mais :wink:
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2020. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>MySQL &#43; Windows: Command Line Tips</h1>
+  
+  
+  <time datetime=2014-03-29T00:00:00Z class="post-date">2014-03-29</time>
+  
+  <p>On this post, I&rsquo;ll share some handy <a href="http://www.mysql.com/">MySQL</a> commands I&rsquo;ve been through in the last months, and now they&rsquo;re a essential part of my daily work <del>and I&rsquo;m writing them down to never forget them anymore ;-)</del>.</p>
+<blockquote>
+<p><strong>Important</strong>: none of these commands below will work unless you&rsquo;ve properly have both root access and MySQL command line tools configured on your PATH environment variable.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysql -u user -p database_name
+</code></pre></div><p>Basic command to connect to a local MySQL server.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysqldump -u user -p database_name &gt; C:<span style="color:#ae81ff">\p</span>ath<span style="color:#ae81ff">\t</span>o<span style="color:#ae81ff">\f</span>ile.sql
+</code></pre></div><p>Export all database information (data and structure).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysqldump -u user -p database_name --no-data &gt; C:<span style="color:#ae81ff">\p</span>ath<span style="color:#ae81ff">\t</span>o<span style="color:#ae81ff">\f</span>ile.sql
+</code></pre></div><p>Export all database information except data (only structute).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">echo create database database_name | mysql -u user -p
+</code></pre></div><p>Using <em>echo</em> command from Windows batch script to create a database. Handy when you need to create a database without graphic tools. Note that you don&rsquo;t need to use quotes neither semicolon.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysqldump -u user -p --all-databases &gt; C:<span style="color:#ae81ff">\p</span>ath<span style="color:#ae81ff">\t</span>o<span style="color:#ae81ff">\f</span>ile.sql
+</code></pre></div><p>Dump all information about all databases.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mysql -u root -p database_name &lt; C:<span style="color:#ae81ff">\p</span>ath<span style="color:#ae81ff">\t</span>o<span style="color:#ae81ff">\f</span>ile.sql
+</code></pre></div><p>Import all information from <em>file.sql</em> into a database.</p>
+<p>Note that all the commands assume that you&rsquo;re handling with a local MySQL server (localhost). If you need to connect to a different host, use <code>-h hostname</code> to perform every command, as <code>mysql -h hostname -u user -p database_name</code>.</p>
+
+</div>
+
+
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

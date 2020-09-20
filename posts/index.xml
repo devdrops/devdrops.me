@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DevDrops</title>
+    <link>http://devdrops.me/</link>
+    <description>Recent content on DevDrops</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Wed, 06 May 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Xdebug, NetBeans and Vagrant</title>
+      <link>http://devdrops.me/posts/xdebug-netbeans-and-vagrant/</link>
+      <pubDate>Wed, 06 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/xdebug-netbeans-and-vagrant/</guid>
+      <description>Hi! In this short post I&amp;rsquo;ll describe the steps I&amp;rsquo;ve made, with the great help of a work colleague, on how to achieve the combination of these great tools together: NetBeans, Xdebug and Vagrant.
+The following steps were executed in a vagrant box using Ubuntu, and with the Yosemite as the OS for the hosting machine.
+Xdebug Xdebugis one of the most amazing tools for any PHP developer. Consider yourself in the following situation: you have your code base, developed under some framework, and you have some few bugs while developing new features.</description>
+    </item>
+    
+    <item>
+      <title>Using PHP CS Fixer on NetBeans 8.0</title>
+      <link>http://devdrops.me/posts/using-php-cs-fixer-on-netbeans-8.0/</link>
+      <pubDate>Tue, 16 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/using-php-cs-fixer-on-netbeans-8.0/</guid>
+      <description>Recently on it&amp;rsquo;s version 8.0 (note: there&amp;rsquo;s a new stable release, NetBeans 8.0.1 at the present moment), the NetBeans IDE highlighted some new resources for PHP projects. One of the most interesting is the extension for PHP Coding Standards Fixer (A.K.A. PHP CS Fixer).
+What is the PHP CS Fixer: a brief explanation For those who didn&amp;rsquo;t heard about PHP CS Fixer before (/me included), it&amp;rsquo;s pretty easy: it&amp;rsquo;s a tool to evaluate and apply fixes into your PHP code, according to the famous PHP code standards well know as PSR (PHP Standard Recomendation, as described at the PHP FIG site).</description>
+    </item>
+    
+    <item>
+      <title>MySQL &#43; Windows: Command Line Tips</title>
+      <link>http://devdrops.me/posts/mysql-windows-command-line-tips/</link>
+      <pubDate>Sat, 29 Mar 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/mysql-windows-command-line-tips/</guid>
+      <description>On this post, I&amp;rsquo;ll share some handy MySQL commands I&amp;rsquo;ve been through in the last months, and now they&amp;rsquo;re a essential part of my daily work and I&amp;rsquo;m writing them down to never forget them anymore ;-).
+ Important: none of these commands below will work unless you&amp;rsquo;ve properly have both root access and MySQL command line tools configured on your PATH environment variable.
+ mysql -u user -p database_name Basic command to connect to a local MySQL server.</description>
+    </item>
+    
+    <item>
+      <title>Using PHP_CodeSniffer on NetBeans 7.4</title>
+      <link>http://devdrops.me/posts/using-php-codesniffer-on-netbeans-7.4/</link>
+      <pubDate>Sun, 22 Dec 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/using-php-codesniffer-on-netbeans-7.4/</guid>
+      <description>In this first post, I&amp;rsquo;ll share my basic experience in how to use an important tool to assure and verify your code quality.
+Special thanks to Tomas Mysik and Adam McAuley for their efforts on Bugzilla and the NetBeans PHP Mailing List, which helped me a lot on how to use these combined tools, and then create this tutorial.
+Requirements  PHP &amp;gt;= 5.3 NetBeans 7.4 PEAR  Note: I&amp;rsquo;m assuming you already have an HTTP Server (like Apache) installed and ready for action.</description>
+    </item>
+    
+    <item>
+      <title>Palestras</title>
+      <link>http://devdrops.me/talks/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/talks/</guid>
+      <description>Lista de todas as apresentações e palestras. Se tiver alguma dúvida, confira a página Sobre Mim :)  2016-11-14 - Refatoração Apresentação no canal Pagar.me Talks. Slides (pt_BR) Video (pt_BR)   2016-12-10 - Refatoração Apresentação no canal HHBR. Slides (pt_BR) Video (pt_BR)   2017-04-18 - Refatoração Apresentação feita no meetup do PHPSP+Talks em São Paulo - SP. Slides (pt_BR)   2017-05-26 - SPL - Estruturas de Dados Apresentação no canal Pagar.</description>
+    </item>
+    
+    <item>
+      <title>Sobre mim</title>
+      <link>http://devdrops.me/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/about/</guid>
+      <description> Oi! Eu sou Davi Marcondes Moreira, desenvolvedor de software morando no Brasil. Trabalho na área desde 2009 e minhas paixões são meu trabalho e ajudar pessoas a serem felizes com o seu trabalho. Também sou palestrante (confira minhas apresentações aqui), Zend Certified Engineer para PHP 5.3, e um entusiasta do desenvolvimento para web.
+ Você pode me encontrar nas seguintes redes:  GitHub Twitter LinkedIn Telegram   </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Using PHP CS Fixer on NetBeans 8.0 &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Blog pessoal sobre tecnologia e outras coisas mais :wink:
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2020. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Using PHP CS Fixer on NetBeans 8.0</h1>
+  
+  
+  <time datetime=2014-09-16T00:00:00Z class="post-date">2014-09-16</time>
+  
+  <p>Recently on it&rsquo;s version 8.0 (note: there&rsquo;s a new stable release, <a href="https://netbeans.org/downloads/">NetBeans 8.0.1</a> at the present moment), the NetBeans IDE highlighted some new resources for PHP projects. One of the most interesting is the extension for  <a href="http://cs.sensiolabs.org/">PHP Coding Standards Fixer</a> (A.K.A. PHP CS Fixer).</p>
+<h3 id="what-is-the-php-cs-fixer-a-brief-explanation">What is the PHP CS Fixer: a brief explanation</h3>
+<p><img src="/2014/09/16/php-cs-logo.png" alt="PHP CS Fixer logo"></p>
+<p>For those who didn&rsquo;t heard about PHP CS Fixer before (/me included), it&rsquo;s pretty easy: it&rsquo;s a tool to evaluate and apply fixes into your PHP code, according to the famous PHP code standards well know as PSR (PHP Standard Recomendation, as described at the <a href="http://www.php-fig.org/">PHP FIG site</a>). PHP CS Fixer is a SensioLabs product, the company behind great quality products as the Symfony framework, <a href="https://security.sensiolabs.org/">SensioLabs Security Checker</a> and many others.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>PHP &gt;= 5.3</li>
+<li>NetBeans 8.0</li>
+</ul>
+<p><strong>Note:</strong> At the present moment I&rsquo;m writing this post, there&rsquo;s still no support available for NetBeans higher than 8.0.</p>
+<h3 id="1-obtaining-the-php-cs-fixer">1) Obtaining the PHP CS Fixer</h3>
+<h4 id="download-phar-file">Download .phar file</h4>
+<p>For this post, we&rsquo;ll pick the .phar file option. You can download it, which contains all the necessary resources to start using it locally into your projects. The download link is located <a href="http://get.sensiolabs.org/php-cs-fixer.phar">here</a>, at the PHP CS Fixer site.</p>
+<p><strong>Note:</strong> Other download options and it&rsquo;s detailed instructions can be found at the PHP CS Fixer site.</p>
+<h3 id="2-netbeans-settings">2) NetBeans settings</h3>
+<p>First, you need to install the PHP CS Fixer plugin, which you can obtain through the Plugins download area.</p>
+<p>Go to &lsquo;Tools &gt; Plugins&rsquo;, and wait for the plugins list to be loaded.</p>
+<p><img src="/2014/09/16/nb-plugins.png" alt="NetBeans Plugins window"></p>
+<p>Click on the &lsquo;Available Plugins&rsquo; tab. On the &lsquo;Search&rsquo; box, type &lsquo;PHP&rsquo; and then select on the plugins available list the &lsquo;PHP CS Fixer&rsquo; by checking the check box. Then, click on the Install button, and follow the basic instructions.</p>
+<p><img src="/2014/09/16/php-cs-fixer-plugin.png" alt="PHP CS Fixer plugin"></p>
+<p>As soon the instalation is finished, go to &lsquo;Tools &gt; Options&rsquo;, then select the &lsquo;PHP&rsquo; tab. Now go to &lsquo;Frameworks &amp; Tools&rsquo; tab, and then, select &lsquo;PHP CS Fixer&rsquo; on the left.</p>
+<p><img src="/2014/09/16/php-cs-fixer-options.png" alt="PHP Options window"></p>
+<p>In the &lsquo;PHP CS Fixer&rsquo; field, click on the &lsquo;Browse..&rsquo; button at the right, and then select the .phar file&rsquo;s location.</p>
+<p><img src="/2014/09/16/php-cs-fixer-browse.png" alt="Selecting the .phar file"></p>
+<p>Once you&rsquo;ve done these steps, Click the &lsquo;Apply&rsquo; button on the bottom right corner and it&rsquo;s done. Now you got everything ready to use :-)</p>
+<h3 id="3-basic-usage">3) Basic usage</h3>
+<p>You can start using the PHP CS Fixer by choosing a single file, folder or even an entire project. Go to the &lsquo;Projects&rsquo; window, and pick any of these choices using the mouse&rsquo;s right button. Then, select the &lsquo;PHP CS Fixer&rsquo; option and then select &lsquo;Fix&rsquo;.</p>
+<p>As PHP CS Fixer is a smart tool, if you&rsquo;re using Composer into your project it will ignore the vendor folder (you don&rsquo;t want to perform changes into framework code, right?).</p>
+<p>You&rsquo;ll see a window displaying all the output from the modified files into your given selection.</p>
+<p><img src="/2014/09/16/php-cs-fixer-output.png" alt="Output details"></p>
+<p><strong>Attention:</strong> This action will automatically change your files, so NetBeans wouldn&rsquo;t notice the file changes (Ctrl + Z will not undo these fixes), so please use a Control Version System like Git or Subversion to manage and assure that you&rsquo;ll only accept changes that you approve.</p>
+<blockquote>
+<p>Tip: On the PHP CS Fixer settings, mark the &lsquo;&ndash;verbose&rsquo; and &lsquo;&ndash;dif&rsquo; in the &lsquo;&ndash;dry-run&rsquo;, then select &lsquo;Fix &ndash;dry-run&rsquo; option to display a list of all fixes that could be applied without changing a single line of code in your files.</p>
+</blockquote>
+
+</div>
+
+
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

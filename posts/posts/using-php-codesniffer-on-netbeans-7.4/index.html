@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Using PHP_CodeSniffer on NetBeans 7.4 &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Blog pessoal sobre tecnologia e outras coisas mais :wink:
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2020. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Using PHP_CodeSniffer on NetBeans 7.4</h1>
+  
+  
+  <time datetime=2013-12-22T00:00:00Z class="post-date">2013-12-22</time>
+  
+  <p>In this first post, I&rsquo;ll share my basic experience in how to use an important tool to assure and verify your code quality.</p>
+<p>Special thanks to <em>Tomas Mysik</em> and <em>Adam McAuley</em> for their efforts on <a href="https://netbeans.org/bugzilla/">Bugzilla</a> and the NetBeans PHP Mailing List, which helped me a lot on how to use these combined tools, and then create this tutorial.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>PHP &gt;= 5.3</li>
+<li><a href="https://netbeans.org/downloads/">NetBeans 7.4</a></li>
+<li><a href="http://pear.php.net/">PEAR</a></li>
+</ul>
+<p><strong>Note:</strong> I&rsquo;m assuming you already have an HTTP Server (like Apache) installed and ready for action.</p>
+<h4 id="1-php_codesniffer">1) PHP_CodeSniffer</h4>
+<p>It&rsquo;s a powerfull tool to verify if your code attends to a specific set of rules, contained on a <em>standard</em>. It can also be used thought prompt or command line.</p>
+<p>To install this tool, we&rsquo;ll use <em>Composer</em>, the modern package manager for PHP tools and projects. I&rsquo;ll consider that you already have Composer installed and ready for action, so fire up your terminal (DOS on Windows) and execute the command below:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">composer global require <span style="color:#e6db74">&#34;squizlabs/php_codesniffer=*&#34;</span>
+</code></pre></div><blockquote>
+<p>Tip: the directive global will provide the installed tool for all environments. Just remember to check that you have the <em>~/.composer/vendor/bin/</em> in your <em>PATH</em>, on Windows by checking the environment variables.</p>
+</blockquote>
+<p>To finally check, run <code>phpcs -i</code>, where the directive <code>-i</code> asks for PHP_CodeSniffer to show alll the standards installed on your machine. You should see this message as a confirmation, as the same command on a Linux environment:</p>
+<p><img src="/2013/12/22/phpcs_standards.png" alt="phpcs -i"></p>
+<h4 id="2-setting-things-up-on-netbeans">2) Setting things up on NetBeans</h4>
+<p>Once you&rsquo;ve installed PHP CodeSniffer successfully, you&rsquo;ll need to inform the path of your phpcs file (in Windows, <em>phpcs.bat</em>) to allow NetBeans to use  PHP CodeSniffer.</p>
+<p>Go to <em>Tools &gt; Options &gt; PHP &gt; Code Sniffer</em>. Look for the <em>Code Sniffer</em> field, and then click on the <em>Search&hellip;</em> button at the right of the field. This will make NetBeans find a list of installed versions of phpcs file on your computer.
+Select the phpcs file (located at your PEAR root&rsquo;s installation folder), and then CodeSniffer is configured and ready for action.</p>
+<blockquote>
+<p>Tip: As soon the phpcs file is correctly configured on NetBeans, you&rsquo;ll see a command line in an output window on NetBeans performing <code>phpcs -i</code>, listing all the standards, as mentioned above.</p>
+</blockquote>
+<p><img src="/2013/12/22/netbeans_phpcs_confirmation.png" alt="netbeans-detail"></p>
+<h4 id="3-how-to-use-it-on-netbeans">3) How to use it on NetBeans</h4>
+<p>Simple and easy. On the top menu, go for <em>Source &gt; Inspect&hellip;</em>. The following window show you the basic settings before perform the inspection:</p>
+<p><img src="/2013/12/22/netbeans_inspect_window.png" alt="netbeans-inspect"></p>
+<ul>
+<li>
+<p><strong>Scope</strong> suggests <em>where</em> you&rsquo;d like to perform the inspection: in a project, all your projects, or even in a single file.</p>
+</li>
+<li>
+<p><strong>Configuration &gt; All Analyzers</strong> allow you to select which tool you would like to use in  the inspection: CodeSniffer, Mess Detector, both, or a customized profile.</p>
+</li>
+</ul>
+<p>Once you have selected all your preferences, click on the <em>Inspect</em> button to start the inspection. It may take some time, so I suggest you to open a window and have some fresh air ;-)</p>
+<blockquote>
+<p>Tip: if you want to change the scope before adjust the settings, select a file or a project in the <em>Projects</em> window before you go to <em>Source &gt; Inspect&hellip;</em> .</p>
+</blockquote>
+<p>NetBeans will then output a list of matchings according to which standards you&rsquo;ve used to perform the inspection, as the image above (a dog icons indicates a CodeSniffer match, and a garbage can points to a MessDetector match). Then, apply all your methods to fix these matchings to assure that your code is 100% according to the standards, as you wish.</p>
+<p><img src="/2013/12/22/phpcs_netbeans_analysis.png" alt="netbeans-result"></p>
+
+</div>
+
+
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

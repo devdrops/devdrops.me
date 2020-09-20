@@ -1,0 +1,53 @@
+baseURL = "http://devdrops.me/"
+title = "DevDrops"
+enableRobotsTXT = true
+enableEmoji = true
+theme = "hyde"
+publishDir = "posts"
+languageCode = "pt-br"
+defaultContentLanguage = "pt-br"
+
+hasCJKLanguage = false
+paginate = 8
+rssLimit = 10
+googleAnalytics = "UA-77125737-1"
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = false
+    hl_lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+
+[author]
+  name = "Davi Marcondes Moreira"
+  bio = "Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele."
+  avatar = "me/me.jpeg"
+
+[Menus]
+  main = [
+    {Name = "Sobre", Weight = 10, Identifier = "about", URL = "/about/"},
+    {Name = "Artigos", Weight = 20, Identifier = "archives", URL = "/posts/"},
+    {Name = "Palestras", Weight = 30, Identifier = "talks", URL = "/talks/"}
+  ]
+
+[Params]
+  subtitle = "Golang | PHP | JS"
+  description = "Blog pessoal sobre tecnologia e outras coisas mais :wink:"
+  copyright = "Davi Moreira - @devdrops"
+  authorbox = true
+  post_navigation = true
+  post_meta = ["date", "tags"]
+  dateformat = "2006-01-02"
+  languageCode = "pt-br"
+
+[Params.sidebar]
+  home = "right"
+  list = "left"
+  single = false

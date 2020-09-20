@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.74.3" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Xdebug, NetBeans and Vagrant &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Blog pessoal sobre tecnologia e outras coisas mais :wink:
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2020. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Xdebug, NetBeans and Vagrant</h1>
+  
+  
+  <time datetime=2015-05-06T00:00:00Z class="post-date">2015-05-06</time>
+  
+  <p>Hi! In this short post I&rsquo;ll describe the steps I&rsquo;ve made, with the great help of a work colleague, on how to achieve the combination of these great tools together: <strong>NetBeans</strong>, <strong>Xdebug</strong> and <strong>Vagrant</strong>.</p>
+<p>The following steps were executed in a vagrant box using Ubuntu, and with the Yosemite as the OS for the hosting machine.</p>
+<h3 id="xdebug">Xdebug</h3>
+<p><img src="/2015/05/06/xdebug-logo.png" alt="Xdebug"></p>
+<p><!-- raw HTML omitted --><strong>Xdebug</strong><!-- raw HTML omitted --> is one of the most amazing tools for any PHP developer.
+Consider yourself in the following situation: you have your code base, developed under some framework, and you have some few bugs while developing new features. The most common attitude would be to add some <code>echo</code> calls to find out what exactly is happening in your code. Or even some <code>var_dump</code> to output the value of some variables.</p>
+<p>Well that&rsquo;s the most usual behaviour for many developers. But if you&rsquo;ve started with any other language instead of PHP, you know how valuable is a proper debugger. That&rsquo;s why xdebug was created: to bring the same functionality for PHP devs.</p>
+<p><img src="/2015/05/06/breakpoint.png" alt="phpcs -i"></p>
+<h3 id="vagrant">Vagrant</h3>
+<p><img src="/2015/05/06/vagrant-logo.png" alt="Vagrant"></p>
+<p><!-- raw HTML omitted --><strong>Vagrant</strong><!-- raw HTML omitted --> is a tool to provide virtual environments for development, with different specifications from each other.  It&rsquo;s based on virtual machines inside your OS, and allow you to have flexible and portable environments.</p>
+<blockquote>
+<p>For this post, I&rsquo;ll consider that you already have an environment with Vagrant in your machine up and running.</p>
+</blockquote>
+<h4 id="installing-and-configuring-xdebug">Installing and Configuring Xdebug</h4>
+<p>First of all, you need to install Xdebug. From inside your vagrant box, execute the following command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo apt-get install php5-xdebug
+</code></pre></div><p>This will install the <code>xdebug.so</code> extension file inside of <code>/usr/lib/php5/20121212/</code> path.
+Once the command is complete, check with <code>phpinfo()</code>to find that the extension is correctly installed.</p>
+<p>Then, we have to proceed to edit some basic configuration files:</p>
+<ol>
+<li>The <code>20-xdebug.ini</code> file, which is a config file for Xdebug;</li>
+<li>And the <code>php.ini</code>, which is the basic config file for PHP.</li>
+</ol>
+<p>You can find the <code>20-xdebug.ini</code> file inside of these paths: <code>/etc/php5/cli/conf.d/</code> and <code>/etc/php5/fpm/conf.d/</code>. If you can&rsquo;t find these files, then create them inside of these paths.</p>
+<p>For both <code>20-xdebug.ini</code> files, add the following settings:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">zend_extension=/usr/lib/php5/20121212/xdebug.so
+xdebug.default_enable=1
+xdebug.remote_enable=1
+xdebug.remote_connect_back=on
+xdebug.remote_port=9000
+xdebug.remote_autostart=0
+xdebug.remote_log=/tmp/php5-xdebug.log
+xdebug.idekey=netbeans-xdebug
+</code></pre></div><p>These are parameters for Xdebug to work properly. Remember that the <code>netbeans-xdebug</code> value is designed to follow NetBeans instructions.</p>
+<p>Once the <code>20-xdebug.ini</code> is created/updated, it&rsquo;s time to add more settings for the <code>php.ini</code> files. You may find them in the <code>/etc/php5/cli</code> and <code>/etc/php5/fpm</code> paths. For these files, add the following parameters:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">[xdebug]
+zend_extension=&#34;/usr/lib/php5/20121212/xdebug.so&#34;
+xdebug.remote_enable=1
+xdebug.remote_host=localhost
+xdebug.max_nesting_level=1000
+</code></pre></div><p>Now remember to restart the fpm and HTTP server services and you have the Xdebug installed successfully.</p>
+<h2 id="netbeans-settings-and-tips">NetBeans Settings and Tips</h2>
+<p>Now that you already have the Xdebug ready for action, it&rsquo;s time to configure it for your IDE. Go to Options &gt; PHP &gt; Debugging and add the following settings, as the image below:</p>
+<p><img src="/2015/05/06/xdebug_netbeans_settings1.png" alt="phpcs -i"></p>
+<p>Then, in the Project &gt; Properties &gt; Run Configuration &gt; Advanced, add the following settings:</p>
+<p><img src="/2015/05/06/xdebug_netbeans_settings2.png" alt="phpcs -i"></p>
+<p>The <em>Server Path</em>n is the path inside your vagrant box where the project is located, and the <em>Project Path</em> is the path for your project outside of the vagrant box. NetBeans need this configuration in order to recognize where the project is. These settings should be made for each project.</p>
+<p>Once all these steps are done, you can easily debug your PHP projects on NetBeans through your Vagrant boxes.</p>
+
+</div>
+
+
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>
