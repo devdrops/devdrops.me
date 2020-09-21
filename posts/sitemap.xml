@@ -3,49 +3,49 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://devdrops.me/</loc>
+    <loc>https://devdrops-me.herokuapp.com/</loc>
     <lastmod>2015-05-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://devdrops.me/posts/</loc>
+    <loc>https://devdrops-me.herokuapp.com/posts/</loc>
     <lastmod>2015-05-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://devdrops.me/posts/xdebug-netbeans-and-vagrant/</loc>
+    <loc>https://devdrops-me.herokuapp.com/posts/xdebug-netbeans-and-vagrant/</loc>
     <lastmod>2015-05-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://devdrops.me/posts/using-php-cs-fixer-on-netbeans-8.0/</loc>
+    <loc>https://devdrops-me.herokuapp.com/posts/using-php-cs-fixer-on-netbeans-8.0/</loc>
     <lastmod>2014-09-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://devdrops.me/posts/mysql-windows-command-line-tips/</loc>
+    <loc>https://devdrops-me.herokuapp.com/posts/mysql-windows-command-line-tips/</loc>
     <lastmod>2014-03-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://devdrops.me/posts/using-php-codesniffer-on-netbeans-7.4/</loc>
+    <loc>https://devdrops-me.herokuapp.com/posts/using-php-codesniffer-on-netbeans-7.4/</loc>
     <lastmod>2013-12-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>http://devdrops.me/categories/</loc>
+    <loc>https://devdrops-me.herokuapp.com/categories/</loc>
   </url>
   
   <url>
-    <loc>http://devdrops.me/talks/</loc>
+    <loc>https://devdrops-me.herokuapp.com/talks/</loc>
   </url>
   
   <url>
-    <loc>http://devdrops.me/about/</loc>
+    <loc>https://devdrops-me.herokuapp.com/about/</loc>
   </url>
   
   <url>
-    <loc>http://devdrops.me/tags/</loc>
+    <loc>https://devdrops-me.herokuapp.com/tags/</loc>
   </url>
   
 </urlset>

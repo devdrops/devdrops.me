@@ -1,4 +1,4 @@
-baseURL = "http://devdrops.me/"
+baseURL = "https://devdrops-me.herokuapp.com/"
 title = "DevDrops"
 enableRobotsTXT = true
 enableEmoji = true
@@ -38,8 +38,8 @@ googleAnalytics = "UA-77125737-1"
   ]
 
 [Params]
-  subtitle = "Golang | PHP | JS"
-  description = "Blog pessoal sobre tecnologia e outras coisas mais :wink:"
+  subtitle = ""
+  description = "Site pessoal sobre tecnologia e outras coisas mais ;D"
   copyright = "Davi Moreira - @devdrops"
   authorbox = true
   post_navigation = true

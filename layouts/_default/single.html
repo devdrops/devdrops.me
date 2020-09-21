@@ -8,7 +8,10 @@
   {{ .Content }}
 </div>
 
-{{ partial "authorbox.html" . }}
+  {{/* Considere somente páginas com 'date' preenchido */}}
+  {{ if .Date }}
+  {{ partial "authorbox.html" . }}
+  {{ end }}
 
 {{ if .Site.DisqusShortname -}}
 <h2>Comments</h2>
