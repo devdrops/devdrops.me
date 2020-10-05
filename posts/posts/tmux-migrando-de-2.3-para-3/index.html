@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.75.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>tmux: Migrando de 2.3.* para 3.* &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Site pessoal sobre tecnologia e outras coisas mais ;D
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2020. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>tmux: Migrando de 2.3.* para 3.*</h1>
+  
+  
+  <time datetime=2020-10-04T00:00:00Z class="post-date">2020-10-04</time>
+  
+  <p>Olá!</p>
+<p>Há poucos dias atrás, atualizei a versão do Linux Mint no meu computador pessoal
+de 19 para 20, e fiquei feliz que nessa atualização a versão oferecida por
+padrão tanto do <em>tmux</em> como do <em>tmate</em> são bem mais recentes do que eu estava
+usando:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~ apt-cache show tmux
+
+<span style="color:#75715e"># Entre várias informações úteis, olha a versão logo ali:</span>
+Package: tmux
+Architecture: amd64
+Version: 3.0a-2
+
+~ apt-cache show tmate
+
+<span style="color:#75715e"># E a versão do tmate também:</span>
+Package: tmate
+Architecture: amd64
+Version: 2.4.0-1
+</code></pre></div><p>Quando terminei de instalar os meus <a href="https://github.com/devdrops/my-dotfiles">dotfiles</a>,
+notei que alguma mudança ocorreu entre as versões de tmux que eu usava e a recém
+instalada. Logo ao abrir o programa, notei que a configuração não foi carregada
+corretamente e que havia uma sequência de mensagens:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Omiti o caminho completo do arquivo por motivos óbvios ;)</span>
+.tmux.conf:120: invalid option: message-bg
+.tmux.conf:121: invalid option: message-fg
+.tmux.conf:122: invalid option: message-command-fg
+.tmux.conf:123: invalid option: message-command-bg
+.tmux.conf:125: invalid option: pane-border-fg
+.tmux.conf:126: invalid option: pane-active-border-fg
+.tmux.conf:130: invalid option: mode-bg
+.tmux.conf:131: invalid option: mode-fg
+.tmux.conf:133: invalid option: window-status-current-bg
+.tmux.conf:134: invalid option: window-status-current-fg
+.tmux.conf:135: invalid option: window-status-current-attr
+.tmux.conf:138: invalid option: window-status-bg
+</code></pre></div><p>Ficou claro que a compatibilidade mudou, o que era esperado dado a mudança do
+número de versão _maior_ou <em>major</em> (veja <a href="https://semver.org/lang/pt-BR/">Versionamento Semântico</a>
+para entender o que significa uma versão <em>maior</em>). Fui então ver o que mudou e o
+que fazer, e achei a resposta rápida em uma issue aberta no <a href="https://github.com/tmux/tmux/issues/1689">repositório oficial
+do tmux no GitHub</a>. A issue se refere
+à mesma quebra de mudança que encontrei e que está descrita no <a href="https://raw.githubusercontent.com/tmux/tmux/2.9/CHANGES">CHANGELOG</a>
+da seguinte forma:</p>
+<blockquote>
+<p><em>* The individual -fg, -bg and -attr options have been removed; they</em>
+<em>were superseded by -style options in tmux 1.9.</em></p>
+</blockquote>
+<p>Esse trecho ali não ficou muito claro, mas um <a href="https://github.com/tmux/tmux/issues/1689#issuecomment-486722349">comentário</a>
+na mesma issue que citei me ajudou a entender melhor o que exatamente havia
+mudado:</p>
+<blockquote>
+<p>The form is exactly the same, it is just one option instead of three:</p>
+<p><code>set -g mode-style bg=red,fg=green,blink</code></p>
+</blockquote>
+<p>O que isso quer dizer? Basicamente o seguinte:</p>
+<p>As opções usadas na configuração que terminam em <strong>-fg</strong>, <strong>-bg</strong> e <strong>-attr</strong>
+não existem mais. Essas opções se tornaram parâmetros de uma nova opção chamada
+<strong>-style</strong>.</p>
+<p><img src="/2020/10/04/ehfistaile.gif" alt="EH FISTAILE"></p>
+<p>Ou seja:</p>
+<ul>
+<li>Opções que separavam <em>foreground</em>, <em>background</em> e <em>attribute</em> agora são
+unidas.</li>
+<li>A manipulação de <em>foreground</em>, <em>background</em> e <em>attributes</em> é por meio de
+parâmetros, declarados um a um e separados por vírgula.</li>
+</ul>
+<p>Bastou então mudar a configuração no meu <code>.tmux.conf</code> disso:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-batchfile" data-lang="batchfile"><span style="color:#66d9ef">set</span> -g status-bg colour235
+<span style="color:#66d9ef">set</span> -g status-fg colour6
+
+<span style="color:#66d9ef">set</span> -g message-bg colour238
+<span style="color:#66d9ef">set</span> -g message-fg colour191
+<span style="color:#66d9ef">set</span> -g message-command-fg colour33
+<span style="color:#66d9ef">set</span> -g message-command-bg colour237
+
+<span style="color:#66d9ef">set</span> -g pane-border-fg colour235
+<span style="color:#66d9ef">set</span> -g pane-active-border-fg colour196
+
+setw -g mode-bg colour6
+setw -g mode-fg colour235
+
+setw -g window-status-current-bg colour236
+setw -g window-status-current-fg colour156
+<span style="color:#66d9ef">set</span> -g window-status-current-attr bold
+
+setw -g window-status-bg colour235
+</code></pre></div><p>Para isso:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-batchfile" data-lang="batchfile"><span style="color:#66d9ef">set</span> -g status-style bg=colour235,fg=colour6
+
+<span style="color:#66d9ef">set</span> -g message-style bg=colour239,fg=colour191
+<span style="color:#66d9ef">set</span> -g message-command-style bg=colour237,fg=colour33
+
+<span style="color:#66d9ef">set</span> -g pane-border-style fg=colour235
+<span style="color:#66d9ef">set</span> -g pane-active-border-style fg=colour196
+
+setw -g mode-style bg=colour6,fg=colour235
+
+setw -g window-status-current-style bg=colour236,fg=colour156,bold
+
+setw -g window-status-style bg=colour235
+</code></pre></div><p>E pronto! A configuração foi carregada com sucesso e já faz parte do meu
+<a href="https://github.com/devdrops/my-dotfiles/commit/b4f0fdc04748dc55dd4f72c37d644f3c1a232400">repositório de <em>dotfiles</em></a>.</p>
+
+</div>
+
+  
+  
+  
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+  
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

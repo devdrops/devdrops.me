@@ -6,10 +6,17 @@
     <description>Recent content on DevDrops</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Wed, 06 May 2015 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>tmux: Migrando de 2.3.* para 3.*</title>
+      <link>http://devdrops.me/posts/tmux-migrando-de-2.3-para-3/</link>
+      <pubDate>Sun, 04 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/tmux-migrando-de-2.3-para-3/</guid>
+      <description>Olá!
+Há poucos dias atrás, atualizei a versão do Linux Mint no meu computador pessoal de 19 para 20, e fiquei feliz que nessa atualização a versão oferecida por padrão tanto do tmux como do tmate são bem mais recentes do que eu estava usando:
+~ apt-cache show tmux # Entre várias informações úteis, olha a versão logo ali: Package: tmux Architecture: amd64 Version: 3.0a-2 ~ apt-cache show tmate # E a versão do tmate também: Package: tmate Architecture: amd64 Version: 2.</description>
+    </item>
     
     <item>
       <title>Xdebug, NetBeans and Vagrant</title>
