@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.75.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Go: comandos CLI, parte 1 &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/position.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Site pessoal sobre tecnologia e outras coisas mais ;D
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2021. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Go: comandos CLI, parte 1</h1>
+  
+  
+  <time datetime=2021-01-02T00:00:00Z class="post-date">2021-01-02</time>
+  
+  <p>Por curiosidade e vontade de aprender mais, fiquei intrigado com a quantidade de
+comandos disponíveis pela ferramenta CLI <strong>Go</strong>.</p>
+<p><img src="/2021/01/02/215px-Go_Logo_Blue.svg.png#center" alt=""></p>
+<p>A linguagem de programação Go é muito bacana nesse ponto: preza pela
+simplicidade, porém traz consigo todo um conjunto de ferramentas bem diverso,
+para várias tarefas. Muitas linguagens também tem isso, porém poucas trazem
+tanta coisa de forma nativa, de brinde, pronta para uso.</p>
+<p>Para quem não conhece, CLI é uma sigla em inglês que significa <em>Command Line
+Interface</em>, que em nosso idioma podemos traduzir como Interface de Linha de
+Comando. Num resumo, é uma forma de usar um programa pelo terminal, onde
+executamos comandos em linha e não por botões ou caixas de texto da interface
+gráfica do seu sistema operacional.</p>
+<p>Como no dia a dia usamos poucos comandos (eu mesmo uso mais <code>fmt</code>, <code>test</code>, <code>run</code>
+e <code>build</code>), decidi me dedicar a aprender mais o que posso fazer com todos os
+comandos. Ao todo, a ferramenta <code>go</code> possui hoje (<em>1.15.6 linux/amd</em>)
+<strong>17</strong> comandos que, a partir deste artigo, vou tratando aos poucos, dado a
+quantidade de conhecimento agregado em cada comando.</p>
+<p>Este texto é a parte 1 da série de artigos das ferramentas de linha de comando
+da linguagem Go, onde vou falar de <strong>go bug</strong>, <strong>go build</strong>, <strong>go clean</strong> e <strong>go
+doc</strong>.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Descrição</th>
+<th style="text-align:left">Resumo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>bug</code></td>
+<td style="text-align:left"><em>start a bug report</em></td>
+<td style="text-align:left">Instruções para abrir uma issue em <em>golang.org/issue/new</em>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>build</code></td>
+<td style="text-align:left"><em>compile packages and dependencies</em></td>
+<td style="text-align:left">Cria binário.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>clean</code></td>
+<td style="text-align:left"><em>remove object files and cached files</em></td>
+<td style="text-align:left">Limpa arquivos desnecessários criados por packages.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>doc</code></td>
+<td style="text-align:left"><em>show documentation for package or symbol</em></td>
+<td style="text-align:left">Exibe documentação de um pacote.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>env</code></td>
+<td style="text-align:left"><em>print Go environment information</em></td>
+<td style="text-align:left">Exibe informações do ambiente atual.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>fix</code></td>
+<td style="text-align:left"><em>update packages to use new APIs</em></td>
+<td style="text-align:left">Atualiza o uso de APIs antigas no código.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>fmt</code></td>
+<td style="text-align:left"><em>gofmt (reformat) package sources</em></td>
+<td style="text-align:left">Aplica a formatação tradicional no código.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>generate</code></td>
+<td style="text-align:left"><em>generate Go files by processing source</em></td>
+<td style="text-align:left">Executa comandos descritos por diretivas no código.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>get</code></td>
+<td style="text-align:left"><em>download and install packages and dependencies</em></td>
+<td style="text-align:left">Baixa packages importados e suas dependências.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>install</code></td>
+<td style="text-align:left"><em>compile and install packages and dependencies</em></td>
+<td style="text-align:left">Compila e instala packages importados.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>list</code></td>
+<td style="text-align:left"><em>list packages or modules</em></td>
+<td style="text-align:left">Lista packages nomeados no projeto.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>mod</code></td>
+<td style="text-align:left"><em>module maintenance</em></td>
+<td style="text-align:left">Gerenciamento do uso de módulos no projeto.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>run</code></td>
+<td style="text-align:left"><em>compile and run Go program</em></td>
+<td style="text-align:left">Compila e executa código Go.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>test</code></td>
+<td style="text-align:left"><em>test packages</em></td>
+<td style="text-align:left">Executa testes dos packages importados.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>tool</code></td>
+<td style="text-align:left"><em>run specified go tool</em></td>
+<td style="text-align:left">Executa uma das ferramentas listadas por <code>go tool</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>version</code></td>
+<td style="text-align:left"><em>print Go version</em></td>
+<td style="text-align:left">Exibe a versão de Go.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>vet</code></td>
+<td style="text-align:left"><em>report likely mistakes in packages</em></td>
+<td style="text-align:left">Examina código Go por erros não identificados por compiladores.</td>
+</tr>
+</tbody>
+</table>
+<p>Mas para quê servem?</p>
+<h3 id="go-bug">go bug</h3>
+<p>Abre o navegador padrão do seu sistema operacional para reportar um bug como
+registro oficial, fornecendo informações diversas sobre a versão de Go que está
+usando, variáveis de compilação, ambiente etc. É um atalho para reportar
+problemas.</p>
+<h3 id="go-build--o-output--i-build-flags-packages">go build [-o output] [-i] [build flags] [packages]</h3>
+<p>O comando faz a compilação do seu código, incluindo as dependências, e só. Isso
+exclui arquivos com extensão <code>_test.go</code> (padrão de arquivo de teste), ou seja,
+seus testes e os testes das dependências não farão parte da compilação por
+padrão.</p>
+<p>A flag <code>-o</code> serve para definir o nome e caminho do arquivo binário criado pela
+compilação. É opcional, mas recomenda-se o uso. O comando <code>go build -o ./abc .</code>,
+por exemplo, instrui o compilador para criar no diretório atual o binário <code>abc</code>.</p>
+<p>A flag <code>-i</code> serve para que a compilação instale os packages que são dependências
+do código.</p>
+<p>Depois temos uma série de opções (<em>build flags</em>) para a compilação:</p>
+<p><code>-a</code> serve para forçar o <em>rebuild</em> de pacotes que já estão atualizados.</p>
+<p><code>-n</code> escreve os comandos no terminal, mas sem executá-los.</p>
+<p><code>-p number</code> define o número de programas que podem ser executados em
+paralelo. O padrão usado é o número de CPUs disponíveis. Para usá-la, basta
+substituir <em>number</em> pelo número desejado.</p>
+<p><code>-race</code> habilita detecção de <em>race conditions</em> no momento da compilação. Uma
+<em>race condition</em> ocorre quando dois ou mais processos são executados fora da
+ordem sequencial esperada, causando efeitos indesejados no programa. Se uma
+<em>race condition</em> é encontrada, o compilador escreve uma mensagem de atenção.
+Mesmo sendo um excelente recurso da linguagem, é preciso ser usado com
+prudência: uma vez habilitado, pode consumir 10 vezes o uso de CPU e memória.
+Recomendo a leitura <a href="https://blog.golang.org/race-detector">deste texto</a> para
+entender quando usar essa opção da forma mais adequada.</p>
+<p><code>-msan</code> ou <em>memory sanitizer</em>, serve para que o ato de compilação faça uso de
+sanitização de memória, que é um processo bem interessante: em casos de
+memória em pilha (<em>stack</em>) ou monte (<em>heap</em>), algumas alocações de memória podem
+ser lidas antes de serem escritas. O sanitizador de memória detecta esses casos
+onde pode haver efeitos na execução do programa. Recomendo a leitura
+<a href="https://github.com/google/sanitizers/wiki/MemorySanitizer">deste texto</a> para se
+aprofundar mais no assunto.</p>
+<p><code>-v</code> escreve o nome dos packages conforme são compilados.</p>
+<p><code>-work</code> se refere ao diretório temporário criado e usado na compilação. Go se
+utiliza de diretórios temporários para criar o binário na compilação para
+várias tarefas e os apaga depois da tarefa cumprida. Quando usamos esta flag, o
+comando exibe o local desse diretório e o preserva, sem apagá-lo.</p>
+<p><code>-x</code> escreve cada comando realizado no ato da compilação.</p>
+<p><code>-asmflags '[pattern=]arg list'</code> serve para operações à nível de máquina. Go
+possui partes de código Assembly em algumas de suas libs nativas e permite que o
+comando <code>go build</code> crie versões em Assembly do seu código. Isso quer dizer que a
+linguagem resolveu sua própria forma de &ldquo;produzir&rdquo; código Assembly, e não que
+tem toda a bagagem de outra linguagem, o que torna a linguagem &ldquo;portátil&rdquo;. Esta
+opção permite o uso de flags específicas no resultado desse tipo de compilação.
+Recomendo demais assistir <a href="https://www.youtube.com/watch?v=KINIAgRpkDA">esta apresentação</a>
+do Rob Pike que explica a abordagem de Assembly desenvolvida na linguagem para
+se aprofundar mais no assunto.</p>
+<p><code>-buildmode mode</code> serve para indicar qual o modo de compilação (<em>build</em>)
+desejado. Cada modo de compilação vai gerar um resultado diferente. Todas as
+opções de modo de compilação podem ser lidas <a href="https://golang.org/cmd/go/#hdr-Build_modes">aqui</a>.</p>
+<p><code>-compiler name</code> define qual compilador usar: <em>gccgo</em> (compilador baseado no GCC
+GNU Compiler) ou <em>gc</em> (compilador padrão da linguagem).</p>
+<p><code>-gccgoflags '[pattern=]arg list'</code> serve para enviar argumentos específicos
+quando usamos a opção <code>-compiler gccgo</code>.</p>
+<p><code>-gcflags '[pattern=]arg list'</code> por sua vez serve para argumentos específicos
+quando usamos a opção <code>-compiler gc</code>.</p>
+<p><code>-installsuffix suffix</code> serve como um sufixo para o nome do diretório onde vai
+ficar a instalação da compilação, para separar cada diretório de outros
+<em>builds</em>.</p>
+<p><code>-ldflags '[pattern=]arg list'</code> serve para inserir argumentos na fase de <em>link</em>
+(quando, durante a compilação, os arquivos <em>obj</em> estão prontos para se tornar um
+arquivo binário; veja a apresentação do Rob Pike citada acima para entender mais
+do assunto), ou seja, parâmetros a usar na preparação do arquivo binário. Esta
+opção é bem interessante, por isso recomendo a leitura <a href="https://blog.cloudflare.com/setting-go-variables-at-compile-time/">deste texto</a>
+e <a href="https://www.digitalocean.com/community/tutorials/using-ldflags-to-set-version-information-for-go-applications">deste outro texto</a>
+para entender as possibilidades oferecidas por esta opção.</p>
+<p><code>-linkshared</code> serve para uso junto da opção <code>-buildmode=shared</code>. Com esta opção,
+a compilação vai preparar o código que será &ldquo;linkado&rdquo; pelas libs compartilhadas
+geradas pelo <code>buildmode</code> citado.</p>
+<p><code>-mod mode</code> define qual o modo de download dos módulos, o que afeta o uso do
+arquivo <code>go.mod</code>: <em>readonly</em> (permite ao comando <code>go</code> somente a leitura do
+arquivo <code>go.mod</code>, falhando em qualquer tentativa de atualização), <em>vendor</em>
+(carrega as dependêndias de um diretório <em>vendor</em> ao invés de tentar fazer o
+download ou carregar do cache de módulos) ou <em>mod</em> (carrega os módulos do
+diretório de cache de módulos, mesmo se tiver um diretório <em>vendor</em> presente).</p>
+<p><code>-modcacherw</code> serve para deixar os diretórios de módulos recém criados no cache
+de leitura e escrita ao invés de somente leitura. Ou seja, guarda módulos em um
+diretório de cache de módulos com permissões de leitura e escrita.</p>
+<p><code>-modfile file</code> serve para usar outro arquivo de controle de módulos além do
+arquivo <code>go.mod</code> presente na raiz. Este uso é bem curioso porque ainda precisa
+de um arquivo <code>go.mod</code> na raiz, porém este não é utilizado, somente o arquivo
+inserido nesta opção. Seu uso também gera outro arquivo <code>go.sum</code> referente ao
+arquivo de módulo passado na opção.</p>
+<p><code>-pkgdir dir</code> serve para fornecer um diretório onde serão instalados e
+carregados todos os módulos, ao invés dos locais padrão. É útil para quando é
+necessário criar uma onfiguração fora do padrão do projeto.</p>
+<p><code>-tags tag,list</code> serve para passar uma lista de tags a ser usada no processo de
+compilação. Estas tags tem relação com as diretivas que podemos inserir no
+código. Para saber mais quais diretivas usar, leia com atenção
+<a href="https://golang.org/cmd/compile/#hdr-Compiler_Directives">este texto</a>.</p>
+<p><code>-trimpath</code> serve para substituir todos os caminhos absolutos do sistema
+operacional presentes no binário final. No lugar, os caminhos são substituídos
+por <em>go</em> (no caso de packages nativos) ou <em>path@version</em> no caso de módulos, ou
+um caminho de <em>import</em> simples (no uso de <em>GOPATH</em>).</p>
+<p><code>-toolexec 'cmd args'</code> serve para evocar chamadas de outras ferramentas de <code>go tool</code> numa sequência, como <code>vet</code>, <code>asm</code> etc.</p>
+<p>Vale destacar que muitas opções aqui presentes servem não só para o comando <code>go build</code>, mas também para <code>go test</code>, <code>go run</code> e <code>go clean</code>.</p>
+<h3 id="go-clean-clean-flags-build-flags-packages">go clean [clean flags] [build flags] [packages]</h3>
+<p>O comando <code>clean</code> serve para limpeza de itens desnecessários, como arquivos,
+diretórios, cache entre outros, criados na compilação. Seu objetivo principal é
+de encontrar esses arquivos criados por outras ferramentas como Makefiles por
+exemplo, ou chamadas manuais de <code>go build</code>.</p>
+<p>A flag <code>-i</code> habilita a remoção do arquivo ou binário instalado passado no
+comando, que teria sido criado pelo comando <code>go install</code>.</p>
+<p>A flag <code>-n</code> é a execução silenciosa: escreve a execução dos comandos que seriam
+executados, sem executá-los de fato.</p>
+<p>A flag <code>-r</code> habilita o uso recursivo do comando, incluindo as dependências dos
+packages importados no código.</p>
+<p>A flag <code>-x</code> faz com que comandos de remoção sejam escritos conforme são
+executados.</p>
+<p>A flag <code>-cache</code> faz com que o comando apague todo o conteúdo de cache de <code>go build</code>.</p>
+<p>A flag <code>-testcache</code> expira todo o conteúdo de testes guardado no cache de <code>go build</code>.</p>
+<p>A flag <code>-modcache</code>, por sua vez, apaga todo o conteúdo de cache de módulos, por
+completo.</p>
+<h3 id="go-doc--u--c-packagepackagesymbolmethodorfield">go doc [-u] [-c] [package|[package.]symbol[.methodOrField]]</h3>
+<p>O comando <code>go doc</code> exibe a documentação do pacote, podendo mostrar a
+documentação completa ou parcial, dependendo da forma de uso do comando. Essa
+documentação é exatamente a explicação inserida no código (olha o valor de
+documentar bem o código que vocẽ faz!), fornecida em cada arquivo <code>doc.go</code>
+presente no
+<a href="https://github.com/golang/go">repositório oficial da linguagem</a>, só que
+offline, o que é bem útil!</p>
+<p>Se usamos o comando sem passar o nome do package, apenas <code>go doc</code>, o comando
+busca a documentação do package do diretório onde se encontra.</p>
+<p>O argumento de package passado é interpretado da forma como na sintaxe esperada
+da documentação da linguagem. Ou seja, <code>go doc net/http</code> exibe a documentação de
+<em>http</em>, assim como <code>go doc net/http.Handler</code> exibe somente a parte da
+documentação do <em>type Handler</em> contido no package <em>http</em>, e por aí vai. Note que
+o uso da inicial maiúscula em <em>Handler</em> é o que faz toda a diferença.</p>
+<p>A flag <code>-all</code> exibe toda a documentação do package.</p>
+<p>A flag <code>-c</code> torna o uso de <em>case sensitive</em>, ou seja, o parâmetro deve respeitar
+maiúsculas e minúsculas. <code>go doc net/http.handler</code> funciona, mas <code>go doc -c net/http.handler</code> retorna um erro de documentação não encontrada.</p>
+<p>A flag <code>-cmd</code> trata a presença do package <code>main</code> como um package comum. Se
+ausente, o package <code>main</code> é ignorado na exibição.</p>
+<p>A flag <code>-short</code> faz com que só seja exibida uma forma resumida da documentação.</p>
+<p>A flag <code>-src</code> exibe todo o código fonte do package/símbolo usado. Isso inclui o
+código fonte, função, tipos, bem como outros detalhes não declarados.</p>
+<p>A flag <code>-u</code> mostra a documentação de símbolos, métodos e campos não exportados.</p>
+<hr>
+<p>E é isto! Se gostou, não deixe de acompanhar os próximos artigos para ver mais
+sobre outros comandos de CLI da linguagem Go! 😉</p>
+<hr>
+<h2 id="referências">Referências</h2>
+<ul>
+<li><a href="https://maori.geek.nz/how-go-build-works-750bb2ba6d8e">https://maori.geek.nz/how-go-build-works-750bb2ba6d8e</a></li>
+<li><a href="https://groups.google.com/g/golang-nuts/c/5KkBfRR8kik">https://groups.google.com/g/golang-nuts/c/5KkBfRR8kik</a></li>
+<li><a href="https://stackoverflow.com/questions/63059865/how-do-i-run-go-test-with-the-msan-option-on-ubuntu-18-04">https://stackoverflow.com/questions/63059865/how-do-i-run-go-test-with-the-msan-option-on-ubuntu-18-04</a></li>
+<li><a href="https://blog.golang.org/race-detector">https://blog.golang.org/race-detector</a></li>
+<li><a href="https://github.com/google/sanitizers/wiki/MemorySanitizer">https://github.com/google/sanitizers/wiki/MemorySanitizer</a></li>
+<li><a href="https://pt.stackoverflow.com/questions/3797/o-que-s%C3%A3o-e-onde-est%C3%A3o-a-stack-e-heap">https://pt.stackoverflow.com/questions/3797/o-que-s%C3%A3o-e-onde-est%C3%A3o-a-stack-e-heap</a></li>
+<li><a href="https://medium.com/martinomburajr/go-tools-the-compiler-part-1-assembly-language-and-go-ffc42cbf579d">https://medium.com/martinomburajr/go-tools-the-compiler-part-1-assembly-language-and-go-ffc42cbf579d</a></li>
+<li><a href="https://golang.org/doc/asm">https://golang.org/doc/asm</a></li>
+<li><a href="https://golang.org/cmd/asm/">https://golang.org/cmd/asm/</a></li>
+<li><a href="https://golang.org/doc/install/gccgo">https://golang.org/doc/install/gccgo</a></li>
+<li><a href="https://golang.org/cmd/link/">https://golang.org/cmd/link/</a></li>
+</ul>
+
+</div>
+
+  
+  
+  
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+  
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

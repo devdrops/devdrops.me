@@ -73,7 +73,7 @@ As opções usadas na configuração que terminam em **-fg**, **-bg** e **-attr*
 não existem mais. Essas opções se tornaram parâmetros de uma nova opção chamada
 **-style**.
 
-![EH FISTAILE](/2020/10/04/ehfistaile.gif)
+![EH FISTAILE](/2020/10/04/ehfistaile.gif#center)
 
 Ou seja:
 

@@ -6,7 +6,18 @@
     <description>Recent content on DevDrops</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sun, 04 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go: comandos CLI, parte 1</title>
+      <link>http://devdrops.me/posts/go-comandos-cli-parte-1/</link>
+      <pubDate>Sat, 02 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/go-comandos-cli-parte-1/</guid>
+      <description>Por curiosidade e vontade de aprender mais, fiquei intrigado com a quantidade de comandos disponíveis pela ferramenta CLI Go.
+A linguagem de programação Go é muito bacana nesse ponto: preza pela simplicidade, porém traz consigo todo um conjunto de ferramentas bem diverso, para várias tarefas. Muitas linguagens também tem isso, porém poucas trazem tanta coisa de forma nativa, de brinde, pronta para uso.
+Para quem não conhece, CLI é uma sigla em inglês que significa Command Line Interface, que em nosso idioma podemos traduzir como Interface de Linha de Comando.</description>
+    </item>
+    
     <item>
       <title>tmux: Migrando de 2.3.* para 3.*</title>
       <link>http://devdrops.me/posts/tmux-migrando-de-2.3-para-3/</link>
