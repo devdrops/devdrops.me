@@ -123,29 +123,98 @@ contidas dentro do seu código Go. Por diretivas, estamos aqui falando de
 instruções contidas no código, na forma `//go:generate comando argumento`.
 
 Esses comandos podem executar quaisquer tarefas, mas no geral, são usados para
-alterar ou criar arquivos de código Go. O comando faz uma análise estática dos
+alterar ou criar arquivos de código Go. O `generate` faz uma análise estática dos
 arquivos procurando por essas diretivas e, ao encontrá-las, as executa.
 Lembrando que o comando não é executado de forma automática por nenhum outro,
 como `build` por exemplo; logo, se seu código tem essas diretivas, este comando
-deve ser sempre executado de forma explícita.
-
-No ato da execução, o comando observa cada arquivo atrás de diretivas, que podem
-ser chamadas à binários que podem estar declarados em _$PATH_, por caminho
-completo ou um atalho (ou _alias_).
-
-É importante notar que, para facilitar a identificação desses arquivos gerados
-tanto para humanos como para máquinas, este arquivo gerado deverá conter a
-seguinte declaração (por padrão no começo do arquivo):
-
-```bash
-^// Code generated .* DO NOT EDIT\.$
-```
+deve ser sempre executado de forma explícita. Os comandos a serem executados
+pelo `generate` podem ser chamadas à binários que podem estar declarados em
+_$PATH_, por caminho completo ou um atalho (ou _alias_).
 
 Um detalhe importante: durante a execução, o comando `generate` pode definir
 algumas variáveis de ambiente (daquela lista do `go env`, lembra?), como
 _$GOARCH_, _$GOOS_ entre outras, necessárias à sua execução.
 
-### `go get`
+Pode-se também usar a sintaxe `//go:generate -command binário argumentos`,
+onde `-command` é como uma _flag_ indicando que a string `binário` é um
+comando seguido dos argumentos. Isso permite a criação de um atalho, que
+poderá ser usado em outras diretivas. Funciona assim: primeiro, usamos uma
+diretiva como `//go:generate -command xablau go tool fix`, por exemplo. Com
+essa diretiva declarada, podemos usar então a chamada à `xablau` através da
+diretiva `//go:generate -command xablau ./daora.go`, como um atalho.
+
+Um detalhe bacana: se a operação de uma diretiva sobre um dado _package_
+retorna um erro, todas as execuções desse _package_ são puladas, e o comando
+parte para o próximo _package_, se houver mais de um _package_ declarado como
+argumento.
+
+Dado todas essas informações, vale lembrar que o comando tem uma única opção,
+`-run`. Por padrão, a opção assume uma string vazia (`-run=""`); mas, se
+passamos algum valor, esse deve ser uma expressão regular para identificar
+algum padrão de arquivos a servirem como objeto da execução. Há outras
+opções aceitas pelo comando, como `-v`, `-n` e `-x`, que funcionam da mesma
+forma como são declaradas nos demais comandos:
+
+- `-n` exibe o que será feito sem de fato executar.
+- `-v` excreve o nome dos _packages_ conforme são processados.
+- `-x` escreve os comandos na ordem como são executados.
+
+Há também a opção de usar as mesmas opções do comando `build`.
+
+### `go get [-d] [-f] [-t] [-u] [-v] [-fix] [-insecure] [build flags] [packages]`
+
+O comando `get` serve para fazer o download de _packages_ com base em seus
+nomes completos de importação, e também suas dependências, assim como o
+`go install`. Este comando possui algumas opções próprias, que valem a pena ser
+entendidas:
+
+A opção `-d` instrui o comando a somente baixar os _packages_, sem instalá-los.
+
+A opção `-u` diz para o comando usar a rede para atualizar os _packages_ e suas
+dependências. Nota-se que por padrão o `get` usa a rede para buscar _packages_
+faltando, mas não busca atualizar os que já tem. Logo, esta opção é bem poderosa
+e deve ser usada com ponderação.
+
+A opção `-f` só funciona em conjunto com a opção `-u`, forçando `get -u` a não
+verificar se os _packages_ envolvidos na ação vieram de fato da origem descrita
+no seu caminho de _import_. Isso permite pegar referências locais ao invés de
+dados vindos do mundo externo, se assim desejarmos.
+
+A opção `-fix` aplica `go tool fix` nos _packages_ baixados antes de resolver
+suas dependências ou de seguir para o _build_.
+
+A opção `-insecure` instrui o comando a ignorar a ausência e/ou invalidade de
+HTTPS nas origens do que você está baixando, semelhante à `GOINSECURE` de que
+falamos antes.
+
+A opção `-t` instrui para que, além dos _packages_ serem baixados, que os
+_packages_ necessários para os testes do que foi baixado sejam baixados junto.
+
+A opção `-v` habilita a verbosidade do comando, escrevendo na saída o que está
+sendo executado para o download.
+
+Vale lembrar também que `get` aceita as mesmas opções do comando `build`.
+
+Quando executado para baixar um novo _package_, `get` cria o diretório de
+download em `GOPATH/src/<import-path>`, usando sempre a primeira entrada
+presente em `GOPATH`, se tiver mais de uma. Já quando `get` é usado para conferir
+ou atualizar um _package_, `get` procura na dependência um branch ou tag cujo
+nome confere com a versão de Go em execução. Se não encontrar, o branch
+principal do repositório é utilizado. Essa pode ser uma estratégia interessante
+para libs que desejam fazer experimentos usando `go2` por exemplo, deixando uma
+branch com esse nome para ser identificada na execução de `get`, sem quebrar o
+que já estiver em `main` por exemplo. Um outro detalhe é que se o _package_ a
+ser baixado usar algum submódulo de git (uma forma de vincular repositórios
+externos ao projeto como dependências diretas), esses submódulos também serão
+baixados.
+
+Há mais informações relevantes sobre `get`. Por exemplo, o comando nunca confere
+nem atualiza código localizado dentro da pasta `vendor`. Além disso, se a execução
+está no modo _module-aware_, o comportamento de `get` e suas opções pode mudar.
+Como o uso de `GOPATH` é mais antigo e considerado legado, é importante conhecer as
+diferenças de execução do comando dependendo de seu contexto de execução.
+
+
 
 ### `go install`
 
@@ -158,6 +227,6 @@ _$GOARCH_, _$GOOS_ entre outras, necessárias à sua execução.
 - https://github.com/timob/jnigi
 - https://golang.org/cmd/cgo/
 - https://developer.android.com/reference/android/opengl/EGLDisplay
-- 
+-
 
 
