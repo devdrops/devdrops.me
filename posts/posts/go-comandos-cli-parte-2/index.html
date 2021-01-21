@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br" lang="pt-br">
+<head>
+  <link href="https://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="generator" content="Hugo 0.75.1" />
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Go: comandos CLI, parte 2 &middot; DevDrops</title>
+  <meta name="description" content="" />
+
+  
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/print.css" media="print">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/poole.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/syntax.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/hyde.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/authorbox.min.css">
+  <link type="text/css" rel="stylesheet" href="http://devdrops.me/css/position.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|PT+Sans:400,400i,700">
+
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  
+  
+</head>
+
+  <body class=" ">
+  
+<aside class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      <a href="http://devdrops.me/"><h1>DevDrops</h1></a>
+      <p class="lead">
+      Site pessoal sobre tecnologia e outras coisas mais ;D
+      </p>
+    </div>
+
+    <nav>
+      <ul class="sidebar-nav">
+        <li><a href="/about/"> Sobre </a></li><li><a href="/posts/"> Artigos </a></li><li><a href="/talks/"> Palestras </a></li>
+      </ul>
+    </nav>
+
+    <p>Davi Moreira - @devdrops<br /> &copy; 2021. Todos os direitos reservados.</p>
+  </div>
+</aside>
+
+    <main class="content container">
+    <div class="post">
+  <h1>Go: comandos CLI, parte 2</h1>
+  
+  
+  <time datetime=2021-01-20T00:00:00Z class="post-date">2021-01-20</time>
+  
+  <p>Dando sequência do <a href="/posts/go-comandos-cli-parte-1/">artigo anterior</a>, veremos
+mais detalhes de outros comandos da ferramenta CLI.</p>
+<h3 id="go-env--json--u--w-var-"><code>go env [-json] [-u] [-w] [var ...]</code></h3>
+<p>O comando <code>env</code> serve para descrever informações importantes da versão de Go em
+execução, como por exemplo variáveis de ambiente, informações de sistema
+operacional, entre muitas outras.</p>
+<p>O comando permite algumas opções:</p>
+<p><code>-json</code> define o formato de saída das informações. Por padrão, as informações
+são exibidas no formato shell, como uma série de variáveis de ambiente, por
+exemplo. Usando essa opção, os valores são escritos no formato JSON, chave e
+valor.</p>
+<p>As opções <code>-u</code> e <code>-w</code> são as mais interessantes deste comando: servem para
+definir ou desfazer valores das variáveis de ambiente usadas pela linguagem.
+Para explicar melhor, cabe aqui um exemplo.</p>
+<p>Vamos tomar por exemplo a variável <code>GOINSECURE</code> (introduzida na versão 1.14,
+serve para indicar domínios onde deve-se ignorar a ausência e validade de
+certificados HTTPS no ato de obter módulos do mundo externo). Por padrão, na
+versão 1.15, ela vem definida da seguinte forma:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">GOINSECURE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>
+</code></pre></div><p>Caso você quiser inserir um domínio a ser incluído nessa regra, você pode
+usar a opção <code>-w</code>, que vai inserir o valor desejado conforme o exemplo:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># A sintaxe deve ser VARIAVEL=valor</span>
+go env -w GOINSECURE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;site.com&#34;</span>
+
+<span style="color:#75715e"># Agora, go env vai exibir GOINSECURE=&#34;site.com&#34;</span>
+</code></pre></div><p>Podemos passar uma lista de variáveis para alterar o valor.</p>
+<p>Já a opção <code>-u</code> serve para devolver à variável editada por <code>-w</code> seu valor
+original:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># A sintaxe aqui deve ser só VARIAVEL</span>
+go env -u GOINSECURE
+
+<span style="color:#75715e"># Agora, go env vai exibir o valor original, GOINSECURE=&#34;&#34;</span>
+</code></pre></div><p>Lembrando que  <code>-u</code> só funciona para variáveis editadas por <code>-w</code> 😉</p>
+<h3 id="go-fix-packages"><code>go fix [packages]</code></h3>
+<p>Este é um comando muito importante quando desejamos fazer atualizações de versão
+com segurança de que mudanças na interface de packages não serão quebradas. O
+<code>fix</code> identifica no pacote passado o uso de APIs antigas da linguagem e as
+atualiza para versões novas.</p>
+<p>O comando oferece algumas opções extras, mas que para serem usadas, devemos usar
+o comando fix através do comando <code>tool</code>, na forma <code>go tool fix</code>. Dessa forma, a
+sintaxe do comando pode ser lida da seguinte forma:</p>
+<p><code>go tool fix [-diff] [-r fixname,...] [-force fixname,...] [path ...]</code></p>
+<p>A opção <code>-diff</code> exibe as alterações a fazer sem fazê-las de fato. Uma excelente
+forma de verificar antes se há mudanças e quais serão feitas!</p>
+<p>A opção <code>-r</code> aqui não se trata de recursividade, mas sim de qual grupo de
+rescritas deverão ser feitas. O comando <code>go tool fix -help</code> exibe a lista de
+opções e, por padrão, todos os grupos são utilizados, mas podemos passar
+somente um ou mais grupos se desejamos uma ação mais específica:</p>
+<ul>
+<li><code>cftype</code> para inicializadores e conversões de <em>C.*Ref</em> e tipos <em>JNI</em> (Java
+Native Interface, uma forma de acessar código Java através do seu código Go).</li>
+<li><code>context</code> de <em>golang.org/x/net/context</em>.</li>
+<li><code>egl</code> para inicializadores de EGLDisplay, da EGL API (<em>Embedded-System</em>
+<em>Graphics Library</em>, de Android).</li>
+<li><code>eglconf</code> para inicializadores de EGLConfig, da EGL API (<em>Embedded-System</em>
+<em>Graphics Library</em>, de Android).</li>
+<li><code>gotypes</code> de <em>golang.org/x/tools/go/{exact,types}</em>  para
+<em>go/{constant,types}</em>.</li>
+<li><code>jni</code> para inicializadores de jobjects e subtipos da <em>JNI</em>.</li>
+<li><code>netipv6zone</code> para literais de <em>IPAddr</em>, <em>UDPAddr</em> ou <em>TCPAddr</em>.</li>
+<li><code>printerconfig</code> que adiciona elementos para literais de <em>Config</em>.</li>
+</ul>
+<p>Já a opção <code>-force</code> é como sugere: força a aplicação de <code>fix</code>, mesmo se o código
+já foi atualizado.</p>
+<p>Um detalhe importante: assim como muitas ferramentas, o comando não oferece
+nenhuma forma de backup. Ou seja, use um controle de versão (git, svn, o que
+preferir) antes de rodar o comando.</p>
+<h3 id="go-fmt--n--x-packages"><code>go fmt [-n] [-x] [packages]</code></h3>
+<p>O comando <code>fmt</code> executa uma análise e correção de sintaxe padrão da linguagem.
+Ao ser executado, o comando <code>gofmt -l -w</code> é disparado nos pacotes passados no
+comando, onde <code>-l</code> orienta a escrever o nome dos pacotes identificados para
+alteração e <code>-w</code> orienta a sobrescrever o arquivo quando encontrado. Ou seja, o
+comando é como um atalho para identificação e aplicação de outra ferramenta,
+<code>gofmt</code>, que é a real ferramenta padrão de formatação.</p>
+<p>A opção <code>-n</code> serve para exibir quais mudanças poderão ser feitas, sem
+aplicá-las.</p>
+<p>Já a opção <code>-x</code> escreve os comandos conforme são executados.</p>
+<p>Há ainda uma terceira opção, <code>-mod</code>, que funciona nas mesmas regras usadas no
+comando <code>go build</code> só que aplicadas no contexto de <code>fmt</code>: define qual o tipo de
+módulo onde se aplicar, <em>readonly</em> ou <em>vendor</em>.</p>
+<h3 id="go-generate--run-regexp--n--v--x-build-flags-filego--packages"><code>go generate [-run regexp] [-n] [-v] [-x] [build flags] [file.go... | packages]</code></h3>
+<p>O comando <code>generate</code> serve para executar comandos descritos nas diretivas
+contidas dentro do seu código Go. Por diretivas, estamos aqui falando de
+instruções contidas no código, na forma <code>//go:generate comando argumento</code>.</p>
+<p>Esses comandos podem executar quaisquer tarefas, mas no geral, são usados para
+alterar ou criar arquivos de código Go. O <code>generate</code> faz uma análise estática dos
+arquivos procurando por essas diretivas e, ao encontrá-las, as executa.
+Lembrando que o comando não é executado de forma automática por nenhum outro,
+como <code>build</code> por exemplo; logo, se seu código tem essas diretivas, este comando
+deve ser sempre executado de forma explícita. Os comandos a serem executados
+pelo <code>generate</code> podem ser chamadas à binários que podem estar declarados em
+<em>$PATH</em>, por caminho completo ou um atalho (ou <em>alias</em>).</p>
+<p>Um detalhe importante: durante a execução, o comando <code>generate</code> pode definir
+algumas variáveis de ambiente (daquela lista do <code>go env</code>, lembra?), como
+<em>$GOARCH</em>, <em>$GOOS</em> entre outras, necessárias à sua execução.</p>
+<p>Pode-se também usar a sintaxe <code>//go:generate -command binário argumentos</code>,
+onde <code>-command</code> é como uma <em>flag</em> indicando que a string <code>binário</code> é um
+comando seguido dos argumentos. Isso permite a criação de um atalho, que
+poderá ser usado em outras diretivas. Funciona assim: primeiro, usamos uma
+diretiva como <code>//go:generate -command xablau go tool fix</code>, por exemplo. Com
+essa diretiva declarada, podemos usar então a chamada à <code>xablau</code> através da
+diretiva <code>//go:generate -command xablau ./daora.go</code>, como um atalho.</p>
+<p>Um detalhe bacana: se a operação de uma diretiva sobre um dado <em>package</em>
+retorna um erro, todas as execuções desse <em>package</em> são puladas, e o comando
+parte para o próximo <em>package</em>, se houver mais de um <em>package</em> declarado como
+argumento.</p>
+<p>Dado todas essas informações, vale lembrar que o comando tem uma única opção,
+<code>-run</code>. Por padrão, a opção assume uma string vazia (<code>-run=&quot;&quot;</code>); mas, se
+passamos algum valor, esse deve ser uma expressão regular para identificar
+algum padrão de arquivos a servirem como objeto da execução. Há outras
+opções aceitas pelo comando, como <code>-v</code>, <code>-n</code> e <code>-x</code>, que funcionam da mesma
+forma como são declaradas nos demais comandos:</p>
+<ul>
+<li><code>-n</code> exibe o que será feito sem de fato executar.</li>
+<li><code>-v</code> excreve o nome dos <em>packages</em> conforme são processados.</li>
+<li><code>-x</code> escreve os comandos na ordem como são executados.</li>
+</ul>
+<p>Há também a opção de usar as mesmas opções do comando <code>build</code>.</p>
+<h3 id="go-get--d--f--t--u--v--fix--insecure-build-flags-packages"><code>go get [-d] [-f] [-t] [-u] [-v] [-fix] [-insecure] [build flags] [packages]</code></h3>
+<p>O comando <code>get</code> serve para fazer o download de <em>packages</em> com base em seus
+nomes completos de importação, e também suas dependências, assim como o
+<code>go install</code>. Este comando possui algumas opções próprias, que valem a pena ser
+entendidas:</p>
+<p>A opção <code>-d</code> instrui o comando a somente baixar os <em>packages</em>, sem instalá-los.</p>
+<p>A opção <code>-u</code> diz para o comando usar a rede para atualizar os <em>packages</em> e suas
+dependências. Nota-se que por padrão o <code>get</code> usa a rede para buscar <em>packages</em>
+faltando, mas não busca atualizar os que já tem. Logo, esta opção é bem poderosa
+e deve ser usada com ponderação.</p>
+<p>A opção <code>-f</code> só funciona em conjunto com a opção <code>-u</code>, forçando <code>get -u</code> a não
+verificar se os <em>packages</em> envolvidos na ação vieram de fato da origem descrita
+no seu caminho de <em>import</em>. Isso permite pegar referências locais ao invés de
+dados vindos do mundo externo, se assim desejarmos.</p>
+<p>A opção <code>-fix</code> aplica <code>go tool fix</code> nos <em>packages</em> baixados antes de resolver
+suas dependências ou de seguir para o <em>build</em>.</p>
+<p>A opção <code>-insecure</code> instrui o comando a ignorar a ausência e/ou invalidade de
+HTTPS nas origens do que você está baixando, semelhante à <code>GOINSECURE</code> de que
+falamos antes.</p>
+<p>A opção <code>-t</code> instrui para que, além dos <em>packages</em> serem baixados, que os
+<em>packages</em> necessários para os testes do que foi baixado sejam baixados junto.</p>
+<p>A opção <code>-v</code> habilita a verbosidade do comando, escrevendo na saída o que está
+sendo executado para o download.</p>
+<p>Vale lembrar também que <code>get</code> aceita as mesmas opções do comando <code>build</code>.</p>
+<p>Quando executado para baixar um novo <em>package</em>, <code>get</code> cria o diretório de
+download em <code>GOPATH/src/&lt;import-path&gt;</code>, usando sempre a primeira entrada
+presente em <code>GOPATH</code>, se tiver mais de uma. Já quando <code>get</code> é usado para conferir
+ou atualizar um <em>package</em>, <code>get</code> procura na dependência um branch ou tag cujo
+nome confere com a versão de Go em execução. Se não encontrar, o branch
+principal do repositório é utilizado. Essa pode ser uma estratégia interessante
+para libs que desejam fazer experimentos usando <code>go2</code> por exemplo, deixando uma
+branch com esse nome para ser identificada na execução de <code>get</code>, sem quebrar o
+que já estiver em <code>main</code> por exemplo. Um outro detalhe é que se o <em>package</em> a
+ser baixado usar algum submódulo de git (uma forma de vincular repositórios
+externos ao projeto como dependências diretas), esses submódulos também serão
+baixados.</p>
+<p>Há mais informações relevantes sobre <code>get</code>. Por exemplo, o comando nunca confere
+nem atualiza código localizado dentro da pasta <code>vendor</code>. Além disso, se a execução
+está no modo <em>module-aware</em>, o comportamento de <code>get</code> e suas opções pode mudar.
+Como o uso de <code>GOPATH</code> é mais antigo e considerado legado, é importante conhecer as
+diferenças de execução do comando dependendo de seu contexto de execução.</p>
+<p>Dentro do contexto de <em>module-aware</em>, a primeira ação de <code>get</code> é decidir quais
+dependências serão adicionadas. Para isso, o comando observa cada <em>package</em> e
+busca por primeiro as informações de tags mais recentes. Se não tiver tag
+nenhuma no repositório do <em>package</em>, o comando vai atrás do mais recente
+commit. Claro, tudo isso se a versão de módulo não for definida logo de início.
+Toda esse mecanismo de escolha de versão pode ser suprimido se colocamos um
+<code>@versão</code> no final do nome do <em>package</em> (<code>go get go.uber.org/zap@v1.15.0</code>, por
+exemplo), ou ter somente parte da tag (<code>go get -u go.uber.org/zap@v1</code>, por
+exemplo), fazendo assim que a última versão cuja tag começa com <code>v1</code> seja
+instalada (essa sintaxe é chamada de <em>Module Queries</em>). A informação de versão
+de módulo pode também usar o hash de commit, nome de branch, no caso de
+<em>packages</em> hospedados em algum controle de versão, como GitHub por exemplo.
+Claro, desde que o sufixo (tag ou branch) não tenha conflito com a sintaxe de
+<em>Module Queries</em>.</p>
+<p>Há muitas outras diferenças a se explorar entre contexto de <code>GOPATH</code> e de
+<em>module-aware</em>, que por si só valem todo um texto individual. Se você tem
+curiosidade, todas essas informações podem ser lidas ao executar o comando
+<code>go help module-get</code>.</p>
+<h3 id="go-install--i-build-flags-packages"><code>go install [-i] [build flags] [packages]</code></h3>
+<p>O comando <code>install</code> compila e instala os <em>packages</em> nomeados pelo caminho de
+<em>import</em>.</p>
+<p>A opção <code>-i</code> indica para o comando instalar também as dependências dos
+<em>packages</em> a instalar.</p>
+<p>Além dessa opção, o comando também aceita as mesmas opções do comando
+<code>build</code>.</p>
+<hr>
+<p>No próximo artigo, fecharei com os últimos comandos: <code>list</code>, <code>mod</code>, <code>run</code>,
+<code>test</code>, <code>tool</code>, <code>version</code> e <code>vet</code>.</p>
+<h2 id="referências">Referências</h2>
+<ul>
+<li><a href="https://golang.org/doc/go1.14">https://golang.org/doc/go1.14</a></li>
+<li><a href="https://fantashit.com/cmd-go-add-goinsecure-for-insecure-dependencies/">https://fantashit.com/cmd-go-add-goinsecure-for-insecure-dependencies/</a></li>
+<li><a href="https://github.com/timob/jnigi">https://github.com/timob/jnigi</a></li>
+<li><a href="https://golang.org/cmd/cgo/">https://golang.org/cmd/cgo/</a></li>
+<li><a href="https://developer.android.com/reference/android/opengl/EGLDisplay">https://developer.android.com/reference/android/opengl/EGLDisplay</a></li>
+</ul>
+
+</div>
+
+  
+  
+  
+<div class="authorbox clearfix">
+  <figure class="authorbox__avatar">
+    <img alt="Davi Marcondes Moreira avatar" src="/me/me.jpeg" class="avatar" height="90" width="90">
+  </figure>
+  <div class="authorbox__header">
+    <span class="authorbox__name">Sobre Davi Marcondes Moreira</span>
+  </div>
+  <div class="authorbox__description">
+    Desenvolvedor de software, palestrante, evangelista de trabalho remoto e home office, amante de MTB/XCO e entusiasta de café. Ele/Dele.
+  </div>
+</div>
+
+  
+
+
+    </main>
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-77125737-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+    
+  </body>
+</html>

@@ -6,7 +6,19 @@
     <description>Recent content on DevDrops</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pt-br</language>
-    <lastBuildDate>Sat, 02 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 20 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://devdrops.me/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Go: comandos CLI, parte 2</title>
+      <link>http://devdrops.me/posts/go-comandos-cli-parte-2/</link>
+      <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://devdrops.me/posts/go-comandos-cli-parte-2/</guid>
+      <description>Dando sequência do artigo anterior, veremos mais detalhes de outros comandos da ferramenta CLI.
+go env [-json] [-u] [-w] [var ...] O comando env serve para descrever informações importantes da versão de Go em execução, como por exemplo variáveis de ambiente, informações de sistema operacional, entre muitas outras.
+O comando permite algumas opções:
+-json define o formato de saída das informações. Por padrão, as informações são exibidas no formato shell, como uma série de variáveis de ambiente, por exemplo.</description>
+    </item>
+    
     <item>
       <title>Go: comandos CLI, parte 1</title>
       <link>http://devdrops.me/posts/go-comandos-cli-parte-1/</link>

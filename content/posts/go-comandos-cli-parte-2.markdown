@@ -1,7 +1,7 @@
 ---
 title: "Go: comandos CLI, parte 2"
-date: 2021-01-17
-draft: true
+date: 2021-01-20
+draft: false
 ---
 
 Dando sequência do [artigo anterior](/posts/go-comandos-cli-parte-1/), veremos
@@ -214,11 +214,41 @@ está no modo _module-aware_, o comportamento de `get` e suas opções pode muda
 Como o uso de `GOPATH` é mais antigo e considerado legado, é importante conhecer as
 diferenças de execução do comando dependendo de seu contexto de execução.
 
+Dentro do contexto de _module-aware_, a primeira ação de `get` é decidir quais
+dependências serão adicionadas. Para isso, o comando observa cada _package_ e
+busca por primeiro as informações de tags mais recentes. Se não tiver tag
+nenhuma no repositório do _package_, o comando vai atrás do mais recente
+commit. Claro, tudo isso se a versão de módulo não for definida logo de início.
+Toda esse mecanismo de escolha de versão pode ser suprimido se colocamos um
+`@versão` no final do nome do _package_ (`go get go.uber.org/zap@v1.15.0`, por
+exemplo), ou ter somente parte da tag (`go get -u go.uber.org/zap@v1`, por
+exemplo), fazendo assim que a última versão cuja tag começa com `v1` seja
+instalada (essa sintaxe é chamada de _Module Queries_). A informação de versão
+de módulo pode também usar o hash de commit, nome de branch, no caso de
+_packages_ hospedados em algum controle de versão, como GitHub por exemplo.
+Claro, desde que o sufixo (tag ou branch) não tenha conflito com a sintaxe de
+_Module Queries_.
 
+Há muitas outras diferenças a se explorar entre contexto de `GOPATH` e de
+_module-aware_, que por si só valem todo um texto individual. Se você tem
+curiosidade, todas essas informações podem ser lidas ao executar o comando
+`go help module-get`.
 
-### `go install`
+### `go install [-i] [build flags] [packages]`
+
+O comando `install` compila e instala os _packages_ nomeados pelo caminho de
+_import_.
+
+A opção `-i` indica para o comando instalar também as dependências dos
+_packages_ a instalar.
+
+Além dessa opção, o comando também aceita as mesmas opções do comando
+`build`.
 
 ---
+
+No próximo artigo, fecharei com os últimos comandos: `list`, `mod`, `run`,
+`test`, `tool`, `version` e `vet`.
 
 ## Referências
 
@@ -227,6 +257,4 @@ diferenças de execução do comando dependendo de seu contexto de execução.
 - https://github.com/timob/jnigi
 - https://golang.org/cmd/cgo/
 - https://developer.android.com/reference/android/opengl/EGLDisplay
--
-
 
