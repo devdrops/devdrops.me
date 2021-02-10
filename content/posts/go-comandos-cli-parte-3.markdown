@@ -202,7 +202,105 @@ type Module struct {
 
 #### `go mod edit [editing flags] [go.mod]`
 
-O comando `edit` serve para editar o arquivo _go.mod_.
+O comando `edit` serve para editar o arquivo _go.mod_. Sua função principal
+é de oferecer uma forma de edição do _go.mod_ através de comandos
+automatizados, seja por algum script ou comando num fluxo de integração
+contínua, por exemplo.
+
+A opção `-fmt` serve para formatar o arquivo, sem fazer outro tipo de
+alteração. Essa formatação acontece de forma implícita no uso de qualquer
+outro uso de `go mod` que usam e/ou rescrevem o arquivo _go.mod_, portanto
+seu uso explícito só é necessário se nenhuma outra opção for usada em
+conjunto.
+
+Por exemplo, considere este trecho de `go.mod` de um projeto que importa dois
+_packages_: `"go.uber.org/zap"` e `"github.com/sirupsen/logrus"`:
+
+```go
+require (
+        github.com/sirupsen/logrus v1.7.0 // indirect
+        go.uber.org/zap v1.16.0 // indirect
+)
+```
+
+Se voluntariamente mudamos a ordem dos _packages_, da seguinte forma:
+
+```go
+require (
+        go.uber.org/zap v1.16.0 // indirect
+        github.com/sirupsen/logrus v1.7.0 // indirect
+)
+```
+
+Ao executar o comando `go mod edit -fmt go.mod`, a instrução `require` volta
+à formatação original:
+
+```go
+require (
+        github.com/sirupsen/logrus v1.7.0 // indirect
+        go.uber.org/zap v1.16.0 // indirect
+)
+```
+
+Nota: o comando aceita a opção `-x`, porém mesmo assim, sua execução não
+escreve nada na saída.
+
+A opção `-module` serve para mudar o conteúdo da linha `module` no começo
+do arquivo `go.mod`, sem executar nenhuma validação. Útil caso o diretório
+e/ou caminho do módulo mudou e você quer mudar o arquivo de forma automática.
+
+Por exemplo, se no arquivo `go.mod` temos:
+
+```go
+module exemplo.com/eita
+```
+
+Ao executar o comando `go mod edit -module github.com/exemplo/eita`, teremos:
+
+```go
+module github.com/exemplo/eita
+```
+
+As opções `-require` e `-droprequire` servem respectivamente adicionar e
+remover um _package_ na instrução `require` do `go.mod`.
+
+Tomando por exemplo o mesmo trecho de `require` do exemplo anterior:
+
+```go
+require (
+        github.com/sirupsen/logrus v1.7.0 // indirect
+        go.uber.org/zap v1.16.0 // indirect
+)
+```
+
+Se executamos o comando
+`go mod edit -require=github.com/eita/preula@v1.2.3 go.mod`, temos o resultado:
+
+```go
+require (
+        github.com/eita/preula v1.2.3
+        github.com/sirupsen/logrus v1.7.0 // indirect
+        go.uber.org/zap v1.16.0 // indirect
+)
+```
+
+Essa opção não performa validações no conteúdo passado.
+
+Agora, se executamos o comando
+`go mod edit -droprequire=github.com/eita/preula go.mod`, teremos:
+
+```go
+require (
+        github.com/sirupsen/logrus v1.7.0 // indirect
+        go.uber.org/zap v1.16.0 // indirect
+)
+```
+
+As opções `-exclude` e `-dropexclude` servem respectivamente adicionar e
+remover um _package_ na instrução de `exclude` do `go.mod`.
+
+As opções `-replace` e `-dropreplace` servem respectivamente adicionar e
+remover um _package_ na instrução de `exclude` do `go.mod`.
 
 #### `go mod graph`
 
