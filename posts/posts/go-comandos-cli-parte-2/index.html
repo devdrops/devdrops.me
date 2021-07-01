@@ -3,7 +3,7 @@
 <head>
   <link href="https://gmpg.org/xfn/11" rel="profile">
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta name="generator" content="Hugo 0.75.1" />
+  <meta name="generator" content="Hugo 0.84.3" />
 
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,7 +57,16 @@
   
   <time datetime=2021-01-20T00:00:00Z class="post-date">2021-01-20</time>
   
-  <p>Dando sequência do <a href="/posts/go-comandos-cli-parte-1/">artigo anterior</a>, veremos
+  <p>Este texto faz parte de uma série de 3 materiais no assunto:</p>
+<ul>
+<li>Parte 1: <a href="/posts/go-comandos-cli-parte-1/"><code>bug</code>, <code>build</code>, <code>clean</code> e <code>doc</code></a></li>
+<li>Parte 2: <a href="/posts/go-comandos-cli-parte-2/"><code>env</code>, <code>fix</code>, <code>fmt</code>, <code>generate</code>, <code>get</code> e <code>install</code></a></li>
+<li>Parte 3: <a href="/posts/go-comandos-cli-parte-3/"><code>list</code>, <code>mod</code>, <code>run</code>, <code>test</code>, <code>tool</code>, <code>version</code> e <code>vet</code></a></li>
+</ul>
+<p>Vale destacar que toda a documentação de referência utilizada foi baseada na
+versão <em>1.15.6 linux/amd64</em>, obtida pela
+<a href="https://hub.docker.com/_/golang">imagem oficial da linguagem Go no Docker Hub</a>.</p>
+<p>Dando sequência do <a href="/posts/go-comandos-cli-parte-1/">artigo anterior</a>, veremos
 mais detalhes de outros comandos da ferramenta CLI.</p>
 <h3 id="go-env--json--u--w-var-"><code>go env [-json] [-u] [-w] [var ...]</code></h3>
 <p>O comando <code>env</code> serve para descrever informações importantes da versão de Go em

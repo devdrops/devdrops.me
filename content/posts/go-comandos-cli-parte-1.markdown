@@ -9,6 +9,16 @@ comandos disponíveis pela ferramenta CLI **Go**.
 
 ![](/2021/01/02/215px-Go_Logo_Blue.svg.png#center)
 
+Este texto faz parte de uma série de 3 materiais no assunto:
+
+- Parte 1: [`bug`, `build`, `clean` e `doc`](/posts/go-comandos-cli-parte-1/)
+- Parte 2: [`env`, `fix`, `fmt`, `generate`, `get` e `install`](/posts/go-comandos-cli-parte-2/)
+- Parte 3: [`list`, `mod`, `run`, `test`, `tool`, `version` e `vet`](/posts/go-comandos-cli-parte-3/)
+
+Vale destacar que toda a documentação de referência utilizada foi baseada na
+versão _1.15.6 linux/amd64_, obtida pela
+[imagem oficial da linguagem Go no Docker Hub](https://hub.docker.com/_/golang).
+
 A linguagem de programação Go é muito bacana nesse ponto: preza pela
 simplicidade, porém traz consigo todo um conjunto de ferramentas bem diverso,
 para várias tarefas. Muitas linguagens também tem isso, porém poucas trazem

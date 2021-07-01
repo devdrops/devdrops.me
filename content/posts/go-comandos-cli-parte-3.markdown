@@ -4,8 +4,19 @@ date: 2021-01-02
 draft: true
 ---
 
-Para finalizar o tema, vamos aqui ver os comandos CLI que ainda restam: `list`,
-`mod`, `run`, `test`, `tool`, `version` e `vet`.
+Este texto faz parte de uma série de 5 materiais no assunto:
+
+- Parte 1: [`bug`, `build`, `clean` e `doc`](/posts/go-comandos-cli-parte-1/)
+- Parte 2: [`env`, `fix`, `fmt`, `generate`, `get` e `install`](/posts/go-comandos-cli-parte-2/)
+- Parte 3: [`list`, `mod` e `run`](/posts/go-comandos-cli-parte-3/)
+- Parte 4 (a fazer): `test` e `version`
+- Parte 5 (a fazer): `tool` e `vet`
+
+Vale destacar que toda a documentação de referência utilizada até aqui foi
+baseada na versão _1.15.6 linux/amd64_, obtida pela
+[imagem oficial da linguagem Go no Docker Hub](https://hub.docker.com/_/golang).
+
+Nesta parte aqui, vamos aqui os seguintes comandos CLI: `list`, `mod` e `run`.
 
 ### `go list [-f format] [-json] [-m] [list flags] [build flags] [packages]`
 
@@ -296,7 +307,7 @@ require (
 )
 ```
 
-As opções `-exclude` e `-dropexclude` servem respectivamente adicionar e
+As opções `-exclude` e `-dropexclude` servem respectivamente para adicionar e
 remover um _package_ na instrução de `exclude` do `go.mod`.
 
 Se executamos o comando
@@ -415,7 +426,7 @@ honnef.co/go/tools@v0.0.1-2019.2.3 golang.org/x/tools@v0.0.0-20190621195816-6e04
 ```
 
 Uma saída bem verbosa, mas que também é completa sobre as dependências
-diretas e indiretas do que colocamos nos projetos, não?
+diretas e indiretas do que colocamos nos projetos.
 
 #### `go mod init [module]`
 
@@ -575,15 +586,6 @@ Este comando, assim como outros casos, aceita as mesmas opções exclusivas do
 comando `go build`, vistas na [primeira parte](/posts/go-comandos-cli-parte-1/)
 desta série.
 
-### `go test`
+A opção `-exec` adiciona um comportamento bem particular: se ausente, o
 
-### `go tool`
-
-### `go version`
-
-### `go vet`
-
----
-
-## Referências
 

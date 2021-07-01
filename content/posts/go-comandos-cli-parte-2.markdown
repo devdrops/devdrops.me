@@ -4,6 +4,16 @@ date: 2021-01-20
 draft: false
 ---
 
+Este texto faz parte de uma série de 3 materiais no assunto:
+
+- Parte 1: [`bug`, `build`, `clean` e `doc`](/posts/go-comandos-cli-parte-1/)
+- Parte 2: [`env`, `fix`, `fmt`, `generate`, `get` e `install`](/posts/go-comandos-cli-parte-2/)
+- Parte 3: [`list`, `mod`, `run`, `test`, `tool`, `version` e `vet`](/posts/go-comandos-cli-parte-3/)
+
+Vale destacar que toda a documentação de referência utilizada foi baseada na
+versão _1.15.6 linux/amd64_, obtida pela
+[imagem oficial da linguagem Go no Docker Hub](https://hub.docker.com/_/golang).
+
 Dando sequência do [artigo anterior](/posts/go-comandos-cli-parte-1/), veremos
 mais detalhes de outros comandos da ferramenta CLI.
 

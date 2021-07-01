@@ -13,10 +13,9 @@
       <pubDate>Wed, 20 Jan 2021 00:00:00 +0000</pubDate>
       
       <guid>http://devdrops.me/posts/go-comandos-cli-parte-2/</guid>
-      <description>Dando sequência do artigo anterior, veremos mais detalhes de outros comandos da ferramenta CLI.
-go env [-json] [-u] [-w] [var ...] O comando env serve para descrever informações importantes da versão de Go em execução, como por exemplo variáveis de ambiente, informações de sistema operacional, entre muitas outras.
-O comando permite algumas opções:
--json define o formato de saída das informações. Por padrão, as informações são exibidas no formato shell, como uma série de variáveis de ambiente, por exemplo.</description>
+      <description>Este texto faz parte de uma série de 3 materiais no assunto:
+ Parte 1: bug, build, clean e doc Parte 2: env, fix, fmt, generate, get e install Parte 3: list, mod, run, test, tool, version e vet  Vale destacar que toda a documentação de referência utilizada foi baseada na versão 1.15.6 linux/amd64, obtida pela imagem oficial da linguagem Go no Docker Hub.
+Dando sequência do artigo anterior, veremos mais detalhes de outros comandos da ferramenta CLI.</description>
     </item>
     
     <item>
@@ -26,8 +25,8 @@ O comando permite algumas opções:
       
       <guid>http://devdrops.me/posts/go-comandos-cli-parte-1/</guid>
       <description>Por curiosidade e vontade de aprender mais, fiquei intrigado com a quantidade de comandos disponíveis pela ferramenta CLI Go.
-A linguagem de programação Go é muito bacana nesse ponto: preza pela simplicidade, porém traz consigo todo um conjunto de ferramentas bem diverso, para várias tarefas. Muitas linguagens também tem isso, porém poucas trazem tanta coisa de forma nativa, de brinde, pronta para uso.
-Para quem não conhece, CLI é uma sigla em inglês que significa Command Line Interface, que em nosso idioma podemos traduzir como Interface de Linha de Comando.</description>
+Este texto faz parte de uma série de 3 materiais no assunto:
+ Parte 1: bug, build, clean e doc Parte 2: env, fix, fmt, generate, get e install Parte 3: list, mod, run, test, tool, version e vet  Vale destacar que toda a documentação de referência utilizada foi baseada na versão 1.</description>
     </item>
     
     <item>
